@@ -1,0 +1,70 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Video2Cast{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static 'style/main.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Ramabhadra|Righteous&display=swap" rel="stylesheet">
+﻿    </head>
+﻿    <body>
+        <div class="blur-block header">
+            <div class="blur-blur"></div>
+            <div class="blur-transparency black"></div>
+            <div class="blur-conteiner nav">
+                <menu>
+                    <li>
+                        <a href="{% url 'index' %}">
+                            <div class="nav-button">
+                                <div class="nav-button-icon"></div>
+                                <div class="nav-button-text">
+                                    Home
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% if user.is_authenticated  %}
+                            {% url 'account_logout' %}
+                        {% else %}{% provider_login_url "google" next="/" %}{% endif %}
+                        ">
+                        <div class="nav-button nav-button-bottm">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">
+                                {% if user.is_authenticated  %}
+                                    Log out{% else %}Login
+                                {% endif %}
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </menu>
+            </div>
+        </div>
+        <main>
+            <div class="logo-name blur-block box-shadow">
+                <div class="blur-blur"></div>
+                <div class="blur-transparency-logo white"></div>
+                <div class="blur-conteiner p-15">
+                    <a href="{% url 'index' %}">VIDEO2CAST</a>
+                </div>
+            </div>
+
+            <div class="content box-shadow">
+                {% block content %}
+                {% endblock content %}
+            </div>
+
+            <footer>
+                <address class="footer-text">
+                    © 2019 Video2Cast.com
+                    <nav>
+                        <a href="{% url 'privacy_policy' %}">Privacy policy</a>
+                    </nav>
+                </address>
+            </footer>
+        </main>
+        <!-- подключаем все скрипты -->
+    </body>
+﻿</html>

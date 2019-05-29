@@ -1,0 +1,6 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% if user.is_authenticated  %}
+        Hello {{ user.first_name }} {{ user.last_name }}!
+    {% endif %}
+{% endblock content %}

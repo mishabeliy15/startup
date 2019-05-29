@@ -1,0 +1,11 @@
+index_podcast/venv
+.idea/
+### Django ###
+*.log
+*.pot
+*.pyc
+index_podcast/__pycache__/
+index_podcast/local_settings.py
+index_podcast/db.sqlite3
+media/
+static/
