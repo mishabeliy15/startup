@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import requests
 
-api_url = 'https://www.googleapis.com/youtube/v3/channels'
+api_url = 'https://www.googleapis.com/youtube/v3/search'
 API_KEY = 'AIzaSyCHgG3JvxaTlD44zWsdUe8_F8_PS0qC5Aw'
 
 def test(request):
@@ -11,6 +11,8 @@ def test(request):
     data = {
         'part': 'snippet',
         'mine': True,
+        "maxResults": 50,
+        "type": "video",
         'key': API_KEY
         }
     head = {"Authorization": "Bearer " + t}
