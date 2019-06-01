@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'mypodcasts.apps.MypodcastsConfig',
+    'myauth.apps.AuthConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +56,8 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+AUTH_USER_MODEL = 'myauth.User'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
