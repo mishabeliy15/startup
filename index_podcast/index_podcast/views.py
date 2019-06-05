@@ -7,3 +7,7 @@ class IndexView(TemplateView):
 
 class PoliticsView(TemplateView):
     template_name = 'privacy_policy.html'
+
+
+class IntroPage(TemplateView):
+    template_name = 'landings/intro_landing.html'

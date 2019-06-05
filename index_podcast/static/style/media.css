@@ -1,0 +1,161 @@
+@media (max-width: 1199px) {
+	html {
+		font-size: 8px;
+	}
+	.logo-title {
+		margin-top: 5px;
+	}
+}
+
+/* повернутьь блоки */
+@media (max-width: 1099px) {
+	html {
+		font-size: 7px;
+	}
+	.conteiner-2-center {
+		flex-direction: column;
+	}
+
+	.work-items {
+		height: 125px;
+	}
+
+	#container .conteiner-box {
+		width: 100%;
+	}
+
+	#container .conteiner {
+		width: 100%;
+	}
+
+	.conteiner-footer {
+		width: 100%;
+	}
+
+	.arrow {
+		-moz-transform: rotate(90deg); /* Для Firefox */
+	    -ms-transform: rotate(90deg); /* Для IE */
+	    -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
+	    -o-transform: rotate(90deg); /* Для Opera */
+	    transform: rotate(90deg);
+	}
+
+	.work-img {
+		width: auto;
+   		height: 55px;
+	}
+}
+
+/* миню в кнопку */
+@media (max-width: 899px) {
+	html {
+		font-size: 6px;
+	}
+
+	.visible-lg {
+		display: none;
+	}
+
+	.m-menu {
+		display: block;
+	}
+
+	.m-menu-link {
+		display: block;
+	}
+}
+
+@media (max-width: 699px) {
+	.visible-lg {
+		display: none;
+	}
+}
+
+@media screen and (orientation: portrait) {
+	html {
+		font-size: 1vh;
+	}
+
+	.visible-lg {
+		display: none;
+	}
+
+	.m-menu {
+		display: block;
+	}
+
+	.m-menu-link {
+		display: block;
+	}
+
+	.conteiner-1-center span {
+		font-size: 1.3rem;
+	}
+
+	.conteiner-1-center h1 {
+		font-size: 5rem;
+	}
+
+	.conteiner-1-center p {
+		font-size: ;
+	}
+
+	#logo-img {
+		display: none;
+	}
+
+	.m-menu li {
+	    margin-top: 10rem;
+	    font-size: 5rem;
+	}
+
+	.fa-icon {
+		height: 100px;
+		width: 100px;
+	}
+
+	.menu-btm-close {
+		height: 100px;
+		width: 100px;
+	}
+
+	.work-items {
+		height: auto;
+		width: 80%;
+		min-height: 150px;
+	}
+
+	.work-img {
+		opacity: 0.25;
+		position: absolute;
+		height: 135px;
+	}
+
+	.conteiner-1-footer-btn {
+		width: 500px;
+	}
+
+	.conteiner-2-center {
+		flex-direction: column;
+	}
+
+	#container .conteiner-box {
+		width: 100%;
+	}
+
+	#container .conteiner {
+		width: 100%;
+	}
+
+	.conteiner-footer {
+		width: 100%;
+	}
+
+	.arrow {
+		-moz-transform: rotate(90deg); /* Для Firefox */
+	    -ms-transform: rotate(90deg); /* Для IE */
+	    -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
+	    -o-transform: rotate(90deg); /* Для Opera */
+	    transform: rotate(90deg);
+	}
+}

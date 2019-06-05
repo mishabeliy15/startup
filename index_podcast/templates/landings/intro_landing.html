@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>video2cast</title>
+        <link rel="stylesheet" href="{% static 'style/landing.css' %}">
+        <link rel="stylesheet" href="{% static 'style/media.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+﻿    </head>
+﻿    <body>
+        <div class="m-menu">
+            <a href="#" class="btn-close"><div class="menu-btm-close"></div></a>
+            <ul>
+                <li><a href="#yak1" class="menu-link">How it works?</a></li>
+                <li><a href="#yak2" class="menu-link">I need it?</a></li>
+                <li><a href="#yak3" class="menu-link">Warranty</a></li>
+                <li><a href="#yak4" class="menu-link log-in-btn">log in</a></li>
+            </ul>
+        </div>
+        <div id="container">
+            <div class="conteiner">
+                <div class="blur-block">
+                    <div class="blur-blur"></div>
+                    <div class="blur-transparency"></div>
+                    <div class="blur-conteiner">
+                        <div class="conteiner-1">
+                            <!--  Внимание -->
+                            <div class="conteiner-1-header">
+                                <div class="logo">
+                                    <svg version="1.1" id="logo-img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                                        <style type="text/css">
+                                        	.st0{display:none;fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+                                        	.st1{display:none;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:10;}
+                                        	.st2{fill:none;stroke:#FFED00;stroke-width:6;stroke-miterlimit:10;}
+                                        	.st3{fill:none;stroke:#27A737;stroke-width:6;stroke-miterlimit:10;}
+                                        </style>
+                                        <path class="st0" d="M95,86.5"/>
+                                        <path class="st0" d="M15,86.5"/>
+                                        <path class="st1" d="M104.4,42.7"/>
+                                        <path class="st2" d="M15.7,26.9c15,7.5,30,15,45,22.4c-15,7.5-30,15-45,22.4"/>
+                                        <line class="st2" x1="15.5" y1="20.3" x2="15.9" y2="34.3"/>
+                                        <line class="st2" x1="15.7" y1="78.6" x2="15.7" y2="64.1"/>
+                                        <path class="st3" d="M81.9,35.9c-0.9-2.8-7.1-11.4-20.6-11.4c-14.1,0-25.5,11.4-25.5,25.5s11.4,25.3,25.5,25.5
+                                        	c14.8,0.2,18.7-7.3,20-10.8"/>
+                                        <line class="st3" x1="75.2" y1="38.7" x2="88.2" y2="33.6"/>
+                                        <line class="st3" x1="74.6" y1="61.9" x2="87.6" y2="67.3"/>
+                                    </svg>
+                                    <div class="logo-title">
+                                        VIDEO2CAST
+                                    </div>
+                                </div>
+                                <div class="menu visible-lg" id="menu">
+                                    <ul>
+                                        <li><a href="#yak1" class="menu-link">How it works?</a></li>
+                                        <li><a href="#yak2" class="menu-link">I need it?</a></li>
+                                        <li><a href="#yak3" class="menu-link">Warranty</a></li>
+                                        <li><a href="{% url 'privacy_policy' %}" class="menu-link">Privacy Policy</a></li>
+                                        <!--
+                                            <li><a href="#yak4" class="menu-link log-in-btn">log in</a></li>
+                                        -->
+                                    </ul>
+                                </div>
+                                <a href="#" class="m-menu-link"><div class="fa-icon"></div></a>
+                            </div>
+                            <div class="conteiner-1-center">
+                                <span>We save your time and money for converting your content and indexing it.</span>
+                                <h1>Looking for new audience for your YouTube channel?</h1>
+                                <p>We will give it to You! We attract new people to you channel by indexing your videos for Podcast services in audio format.</p>
+                            </div>
+                            <div class="conteiner-1-footer">
+                                <a href="#" class="footer-btn"><div class="conteiner-1-footer-btn">
+                                    Get it now!
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="conteiner-box conteiner-2" id="yak1">
+                <!-- Интерес -->
+                <!-- Выбери -> Измени -> Готово -->
+                <div class="conteiner-2-header">
+                    <span>Brief instruction how to index your video</span>
+                    <h2>How to use it?</h2>
+                    <p>Our service provides you and comfort conditions for you to work with your content and fast publishing in search engines. Don't waste your energy for making content only for YouTube, just index it.</p>
+                </div>
+                <div class="conteiner-2-center">
+                    <div class="work-items" style="background-color: #fef5eb;">
+                        <span>Choose</span>
+                        <img class="work-img" src="{% static 'image/cursor.png' %}" alt="Choose">
+                        <p>Log in and choose your video</p>
+                    </div>
+                    <div class="work-arrow">
+                        <img class="arrow" src="{% static 'image/arrow.png' %}" alt="arrow" height="60px">
+                    </div>
+                    <div class="work-items" style="background-color: #fefeeb;">
+                        <span>Change</span>
+                        <img class="work-img" src="{% static 'image/change.jpg' %}" alt="Change">
+                        <p>Change information and description, if you want</p>
+                    </div>
+                    <div class="work-arrow">
+                        <img class="arrow" src="{% static 'image/arrow.png' %}" alt="arrow" height="60px">
+                    </div>
+                    <div class="work-items" style="background-color: #f5feeb;">
+                        <span>Done</span>
+                        <img class="work-img" src="{% static 'image/done.png' %}" alt="Is done">
+                        <p>Publish</p>
+                    </div>
+                </div>
+            </div>
+            <div class="conteiner-box conteiner-3" id="yak2">
+                <!-- Желание -->
+                <div class="conteiner-2-header">
+                    <span>Why you need to start indexing your videos now</span>
+                    <h2>Advantages</h2>
+                    <p> Indexing video for Podcast services provides new audience for you. Did you know, that 48% of podcast listeners don't skip advertisments? It's perfect chance to earn just by clicking a few buttons.</p>
+                </div>
+                <div class="conteiner-3-center">
+                </div>
+            </div>
+            <div class="conteiner-box conteiner-3" id="yak3">
+                <!-- Доверие -->
+                <div class="conteiner-2-header">
+                    <span>All data is fully secured</span>
+                    <h2>Assurance</h2>
+                    <div class="logo-g"></div>
+                </div>
+                <div class="conteiner-4-center">
+                     All your transactions and data is fully protected by Google authorization and international paying systems. You can always write to our support or find all information, that you need, in our privacy policy.
+                </div>
+            </div>
+        </div>
+        <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    </body>
+﻿</html>
