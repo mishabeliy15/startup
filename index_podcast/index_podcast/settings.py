@@ -64,6 +64,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': [
             'profile',
             'email',
+            'https://www.googleapis.com/auth/youtube.readonly',
         ],
         'AUTH_PARAMS': {
             'access_type': 'offline',
@@ -71,6 +72,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -164,3 +166,8 @@ STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'static')
 
 # do the same for media files, it must match /opt/services/djangoapp/media/
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'media')
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
