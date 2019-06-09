@@ -3,6 +3,7 @@ version: '3'
 services:
   djangoapp:
     build: .
+    command: ["gunicorn", "--chdir", "index_podcast", "--bind", ":8000", "index_podcast.wsgi:application"]
     volumes:
       - .:/opt/services/djangoapp/src
       - static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
