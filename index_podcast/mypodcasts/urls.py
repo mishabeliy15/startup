@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .api_view import api_view_my_videos, PodcastViewSet
-
+from .views import PodcastCreateView, PodcastListView
 
 app_name = 'mypodcasts'
 
@@ -11,4 +11,6 @@ router.register(r'podcasts', PodcastViewSet)
 urlpatterns = [
     path('api/videos', api_view_my_videos, name='my_videos'),
     path('api/', include(router.urls)),
+    path('create/', PodcastCreateView.as_view(), name='create'),
+    path('', PodcastListView.as_view(), name="list"),
 ]

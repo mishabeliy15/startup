@@ -1,1 +1,14 @@
 {% extends 'main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <div id="podcasts"></div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'scripts/mypodcasts/mylist.js' %}"></script>
+{% endblock js %}

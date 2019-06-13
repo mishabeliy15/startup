@@ -6,6 +6,7 @@ from .google_api import get_all_info_videos_of_channel
 from .models import Podcast
 from .serializers import PodcastSerializer
 from .permissions import IsOwnerOrReadOnly
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser, FileUploadParser
 
 
 @login_required
@@ -25,6 +26,7 @@ class PodcastViewSet(viewsets.ModelViewSet):
     serializer_class = PodcastSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
     pagination_class = StandardResultsSetPagination
+    parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
