@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import permissions, viewsets
 from .google_api import get_all_info_videos_of_channel
-from .models import Podcast
-from .serializers import PodcastSerializer
+from .models import Podcast, Episode
+from .serializers import PodcastSerializer, EpisodeSerializer
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser, FileUploadParser
 
@@ -17,7 +17,7 @@ def api_view_my_videos(request):
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 9
+    page_size = 15
     page_size_query_param = 'page_size'
 
 
@@ -27,6 +27,20 @@ class PodcastViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
     pagination_class = StandardResultsSetPagination
     parser_classes = (MultiPartParser, FormParser)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        return Podcast.objects.filter(owner=self.request.user).order_by("-created_date")
+
+
+class EpisodeViewSet(viewsets.ModelViewSet):
+    queryset = Episode.objects.all()
+    serializer_class = EpisodeSerializer
+    permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
+    pagination_class = StandardResultsSetPagination
+    parser_classes = (MultiPartParser, FormParser, JSONParser,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

@@ -1,4 +1,4 @@
-from .models import Podcast
+from .models import Podcast, Episode
 from rest_framework import serializers
 
 
@@ -9,3 +9,13 @@ class PodcastSerializer(serializers.ModelSerializer):
     class Meta:
         model = Podcast
         fields = '__all__'
+
+
+class EpisodeSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=False)
+    owner = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Episode
+        fields = '__all__'
+
