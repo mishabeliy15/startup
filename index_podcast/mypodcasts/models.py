@@ -1,14 +1,10 @@
 from django.db import models
+from .services import download_audio_thread, user_directory_path_audio
 
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'user_{0}/podcast_{1}/img/{2}'.format(instance.owner.id, instance.id, filename)
-
-
-def user_directory_path_audio(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/podcast_{1}/audios/{2}'.format(instance.owner.id, instance.id, filename)
 
 
 class Podcast(models.Model):
@@ -35,4 +31,9 @@ class Episode(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            download_audio_thread(self.video_id, self)
+        return super().save(*args, **kwargs)
 

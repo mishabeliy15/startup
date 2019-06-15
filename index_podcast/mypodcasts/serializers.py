@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 
 class PodcastSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=False)
+    image = serializers.ImageField(use_url=False, required=False)
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
@@ -12,8 +12,9 @@ class PodcastSerializer(serializers.ModelSerializer):
 
 
 class EpisodeSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=False)
+    image = serializers.ImageField(use_url=False, required=False)
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
+    audio_file = serializers.FileField(use_url=False, read_only=True)
 
     class Meta:
         model = Episode

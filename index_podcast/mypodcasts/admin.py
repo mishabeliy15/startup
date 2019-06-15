@@ -10,4 +10,3 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Episode)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('owner', 'title', 'video_id', 'podcast', 'created_date', 'audio_file', 'image')
-

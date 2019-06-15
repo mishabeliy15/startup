@@ -46,4 +46,4 @@ class EpisodeViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return Podcast.objects.filter(owner=self.request.user).order_by("-created_date")
+        return Episode.objects.filter(owner=self.request.user).order_by("-created_date")

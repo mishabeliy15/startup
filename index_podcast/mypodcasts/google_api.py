@@ -15,7 +15,7 @@ def get_all_video_of_channel(channelid, maxres=10):
     return requests.get(api_url, params=data).json()
 
 
-def get_more_info_videos(video_ids, part=('statistics', 'contentDetails')):
+def get_more_info_videos(video_ids, part=('snippet', 'statistics', 'contentDetails')):
     api_url = 'https://www.googleapis.com/youtube/v3/videos'
     data = {
         'key': API_KEY,
@@ -28,8 +28,5 @@ def get_more_info_videos(video_ids, part=('statistics', 'contentDetails')):
 def get_all_info_videos_of_channel(channelid, maxRes=10, **kwargs):
     videos = get_all_video_of_channel(channelid, maxRes)
     ids = [i['id']['videoId'] for i in videos['items']]
-    info = get_more_info_videos(ids)
-    for i in range(len(videos['items'])):
-        videos['items'][i]['statistics'] = info['items'][i]['statistics']
-        videos['items'][i]['contentDetails'] = info['items'][i]['contentDetails']
-    return videos
+    return get_more_info_videos(ids)
+
