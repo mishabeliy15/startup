@@ -17,7 +17,7 @@ def api_view_my_videos(request):
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 15
+    page_size = 50
     page_size_query_param = 'page_size'
 
 
@@ -32,7 +32,12 @@ class PodcastViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return Podcast.objects.filter(owner=self.request.user).order_by("-created_date")
+        if 'user_id' in self.request.query_params:
+            return Podcast.objects.filter(owner=self.request.query_params['user_id']).order_by("-created_date")
+        elif 'all' in self.request.query_params and self.request.query_params['all']:
+            return Podcast.objects.all().order_by("-created_date")
+        else:
+            return Podcast.objects.filter(owner=self.request.user).order_by("-created_date")
 
 
 class EpisodeViewSet(viewsets.ModelViewSet):
@@ -46,4 +51,9 @@ class EpisodeViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return Episode.objects.filter(owner=self.request.user).order_by("-created_date")
+        if 'user_id' in self.request.query_params:
+            return Episode.objects.filter(owner=self.request.query_params['user_id']).order_by("-created_date")
+        elif 'all' in self.request.query_params and self.request.query_params['all']:
+            return Episode.objects.all().order_by("-created_date")
+        else:
+            return Episode.objects.filter(owner=self.request.user).order_by("-created_date")

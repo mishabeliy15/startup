@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block head %}
+    <link type="application/rss+xml" rel="alternate"
+      title="{{ object.title }}"
+          href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"/>
+    <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Ramabhadra|Righteous&display=swap" rel="stylesheet">
+{% endblock head %}
+{% block title %}{{ object.title }}{% endblock title %}
+{% block nav %}{% endblock nav %}
+{% block header %}{% endblock header %}
+{% block content %}
+    {% get_media_prefix as MEDIA_PREFIX %}
+    <div class="podcast-block">
+        <div class="podcast-header">
+            <div class="podcast-cover">
+                <img class="podcast-cover-img" src="{{ MEDIA_PREFIX }}{{ object.image }}" alt="podcast cover">
+            </div>
+            <div class="podcast-main-text">
+                <div class="podcast-title">
+                    {{ object.title }}
+                </div>
+                <div class="podcast-description">
+                    {{ object.description }}
+                </div>
+            </div>
+        </div>
+        <div class="podcast-content">
+            {% for episode in object.episodes.all reversed %}
+                <div class="podcast-episod">
+                    <div class="episod-count">
+                        {{ forloop.revcounter }}
+                    </div>
+                    <div class="episod-play">
+                        <div class="btn-paly icon-play">
+                        </div>
+                    </div>
+                    <div class="episod-text">
+                        <div class="episod-title">
+                            {{ episode.title }}
+                        </div>
+                        <div class="episod-description">
+                            {{ episode.description }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        $('.btn-paly').on('click', function (event) {
+            event.preventDefault();
+            $(this).toggleClass('icon-play');
+            $(this).toggleClass('icon-pause');
+        });
+
+        const user_id = {{ object.owner.id }};
+
+        $.getJSON("/mypodcasts/api/podcasts/",{
+                'user_id':user_id
+            }, (data) => console.log(data));
+
+    </script>
+{% endblock js %}

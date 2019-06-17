@@ -24,4 +24,5 @@ urlpatterns = [
     path('intro/', IntroPage.as_view(), name='intro'),
     path('privacy_policy/', PoliticsView.as_view(), name='privacy_policy'),
     path('mypodcasts/', include('mypodcasts.urls')),
+    path('', include('publish_podcasts.urls')),
 ]

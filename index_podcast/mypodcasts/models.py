@@ -20,7 +20,7 @@ class Podcast(models.Model):
 
 class Episode(models.Model):
     owner = models.ForeignKey('myauth.User', on_delete=models.CASCADE)
-    podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE)
+    podcast = models.ForeignKey(Podcast, related_name='episodes', on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     video_id = models.CharField(max_length=64, unique=True)
     audio_file = models.FileField(upload_to=user_directory_path_audio, blank=True)

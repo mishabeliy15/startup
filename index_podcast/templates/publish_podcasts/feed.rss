@@ -1,0 +1,29 @@
+{% load static %}
+{% get_media_prefix as media %}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+    <channel>
+        <title>{{ object.title }}</title>
+        <googleplay:author>{{ object.author }}</googleplay:author>
+        <itunes:author>{{ object.author }}</itunes:author>
+        <description>{{ object.descriptioon }}</description>
+        <googleplay:description>{{ object.descriptioon }}</googleplay:description>
+        <itunes:summary>{{ object.descriptioon }}</itunes:summary>
+        <googleplay:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
+        <itunes:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
+        <link>{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
+        {% for episode in object.episodes.all reversed %}
+            <item>
+                <title>{{ episode.title }}</title>
+                <description>{{ episode.description }}</description>
+                <googleplay:description>{{ episode.description }}</googleplay:description>
+                <itunes:summary>{{ episode.description }}</itunes:summary>
+                <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s O" }}</pubDate>
+                <enclosure url="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
+                           type="audio/mpeg" length="{{ episode.audio_file.size }}"/>
+                <itunes:duration>{{ episode.duration }}</itunes:duration>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

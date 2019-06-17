@@ -14,9 +14,13 @@ function restorePodcastHeader() {
     $("#search-request").bind('input', () => drawPodcasts());
 }
 
+function get_podcast_url(item) {
+    return `/podcasts/user_${ item.owner }/${ item.id }/`
+}
+
 function drawPodcastBlock(item) {
     return `
-                    <a href="">
+                    <a href="${get_podcast_url(item)}">
                         <div class="podcast-block">
                             <img class="podcast-img" src="/media/${item.image}" alt="podcast-img">
                             <div class="podcast-content">

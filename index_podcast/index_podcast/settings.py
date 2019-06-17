@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'mypodcasts.apps.MypodcastsConfig',
     'myauth.apps.AuthConfig',
+    'publish_podcasts.apps.PublishPodcastsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
