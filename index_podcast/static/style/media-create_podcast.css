@@ -1,0 +1,61 @@
+@media screen and (orientation: portrait) {
+    html {
+        font-size: 1.5vh;
+    }
+
+    header {
+        height: 100px;
+    }
+
+    .header-center {
+        margin: 0 5px 0 5px;
+        flex-grow: 2;
+    }
+
+    .header-right {
+        font-size: 0.3rem;
+        flex-grow: 5;
+    }
+
+    .add-podcast-btn {
+        font-size: 1.5rem;
+    }
+
+    .input-podcast-btn {
+        font-size: 1.5rem;
+    }
+
+    .input-block {
+        width: 100%;
+    }
+
+    .input-img {
+        width: 50%;
+        height: 2.5rem;
+        overflow: hidden;
+    }
+
+    .input-text {
+        width: 50%;
+        height: 2.5rem;
+    }
+
+    .input-description {
+        width: 90%;
+        border: 1px solid black;
+    }
+
+    .podcast-blox {
+        min-width: 510px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 510px);
+        grid-gap: 10px;
+        justify-content: center;
+    }
+
+    .podcast-img {
+        margin: 5px;
+        height: 500px;
+        width: 500px;
+    }
+}

@@ -1,0 +1,367 @@
+/* add-video */
+.video-blox {
+    min-width: 510px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.video-block {
+    transition: 0.2s;
+    cursor: pointer;
+    background-color: #ececec;
+    height: 250px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    Justify-content: space-between;
+    -webkit-box-shadow: 6px 6px 12px -6px black;
+    -moz-box-shadow: 6px 6px 12px -6px black;
+    box-shadow: 6px 6px 12px -6px black;
+}
+
+.video-block:hover {
+    background-color: #b7b7b7;
+}
+
+.video-block:active {
+    background-color: #a0a0a0;
+}
+
+.video-img-block {
+    height: 50%;
+    position: relative;
+}
+
+.video-img {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.video-time {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 5px;
+    vertical-align: middle;
+    width: auto;
+    background-color: black;
+    font-size: 2rem;
+    color: white;
+}
+
+.video-content {
+    padding: 0 10px 0 10px;
+    font-size: 2rem;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.video-footer {
+    opacity: 0.7;
+    padding: 5px;
+}
+
+.video-footer-view {
+    font-size: 1.5rem;
+}
+
+.video-footer-view::after {
+    content: 'views'
+}
+
+.video-footer-ago {
+    font-size: 1.5rem;
+}
+
+.video-footer-ago::after {
+    content: 'ago';
+}
+
+.video-active {
+    background-color: #a0a0a0;
+    filter: grayscale(100%);
+}
+
+header {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    height: 50px;
+    min-width: 510px;
+    background-color: #727272;
+    -webkit-box-shadow: 6px 6px 12px -6px black;
+    -moz-box-shadow: 6px 6px 12px -6px black;
+    box-shadow: 6px 6px 12px -6px black;
+}
+
+.header-center {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-name {
+    padding: 0 5px 0 5px;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    outline: none;
+    flex-grow: 5;
+    font-size: 2rem;
+    height: 80%;
+    width: 200px;
+}
+
+.input-name-btn {
+    transition: 0.2s;
+    outline: none;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: 0;
+    font-size: 25px;
+    flex-grow: 1;
+    height: 80%;
+}
+
+.input-name-btn:hover {
+    background-color: #c0c0c0;
+}
+
+.input-name-btn:active {
+    background-color: #a0a0a0;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-video {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+}
+
+#selected-score {
+    margin: 0 5px 0 5px;
+}
+
+.input-video-btn {
+    height: 80%;
+    font-size: 2.1rem;
+    color: #FFF;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    border-bottom: 2px solid white;
+}
+
+.input-video-btn:hover {
+    background-color: #666666;
+}
+
+.input-video-btn:active {
+    background-color: #808080;
+}
+
+.select {
+    position: relative;
+    background: #fff;
+    border: 1px solid #feff99;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.select:before {
+    content: '';
+    background: #fdff66;
+    position: absolute;
+    top: -1px;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    pointer-events: none;
+}
+
+select {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    padding: 0 50px 0 20px;
+    cursor: pointer;
+    font: 300 18px/1.5 'Roboto', sans-serif;
+    text-indent: 5px;
+}
+
+option {
+    outline: none;
+    border: 1px solid black;
+    font: 300 16px/1.5 'Roboto', sans-serif;
+}
+
+.select:after {
+    font-size: 2rem;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 7px 0;
+    border-color: #fff transparent transparent transparent;
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.index-cast-btn {
+    height: 80%;
+    font-size: 2.1rem;
+    color: #FFF;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    border-bottom: 2px solid white;
+}
+
+.index-cast-btn:hover {
+    background-color: #666666;
+}
+
+.index-cast-btn:active {
+    background-color: #808080;
+}
+
+/* podcast list */
+.podcast-block {
+    word-wrap: break-word;
+    margin: 10px;
+    min-width: 510px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #ececec;
+    -webkit-box-shadow: 6px 6px 12px -6px black;
+    -moz-box-shadow: 6px 6px 12px -6px black;
+    box-shadow: 6px 6px 12px -6px black;
+}
+
+.podcast-img {
+    align-items: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.podcast-img-img {
+    height: 110px;
+    width: 110px;
+    background-color: black;
+}
+
+.podcast-img-time {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.podcast-text {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+    justify-content: space-between;
+}
+
+.podcast-text-title {
+    flex-grow: 6;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: 3rem;
+}
+
+.podcast-text-more {
+    font-size: 2.3rem;
+    opacity: 0.7;
+}
+
+.podcast-text-date {
+    font-size: 2rem;
+    text-align: right;
+}
+
+.podcast-block-header {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.podcast-block-btn {
+    justify-content: flex-end;
+    flex-grow: 1;
+    display: flex;
+}
+
+.podcast-block-btn div {
+    height: 40px;
+    width: 40px;
+}
+
+.btn_edit {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #feffcc;
+}
+
+.btn_del {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #ffcccc;
+}
+
+.btn_edit_apply {
+    background-color: #abff99;
+}
+
+.btn-edit-false {
+    background-color: #feffcc;
+}
+
+.episod-more {
+    resize: vertical;
+    width: 100%;
+    max-height: 500px;
+    min-height: 100px;
+    font-size: 2rem;
+}
+
+.episod-title {
+    resize: none;
+    font-size: 3rem;
+}
+
+.display_none {
+    display: none;
+}

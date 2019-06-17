@@ -1,0 +1,241 @@
+/* create-podcast */
+header {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    height: 50px;
+    min-width: 510px;
+    background-color: #727272;
+    -webkit-box-shadow: 6px 6px 12px -6px black;
+    -moz-box-shadow: 6px 6px 12px -6px black;
+    box-shadow: 6px 6px 12px -6px black;
+}
+
+.header-center {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-name {
+    padding: 0 5px 0 5px;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    outline: none;
+    flex-grow: 5;
+    font-size: 2rem;
+    height: 80%;
+    width: 200px;
+}
+
+.input-name-btn {
+    transition: 0.2s;
+    outline: none;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: 0;
+    font-size: 25px;
+    flex-grow: 1;
+    height: 80%;
+}
+
+.input-name-btn:hover {
+    background-color: #c0c0c0;
+}
+
+.input-name-btn:active {
+    background-color: #a0a0a0;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-podcast-btn {
+    height: 80%;
+    font-size: 2.1rem;
+    color: #FFF;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    border-bottom: 2px solid white;
+}
+
+.add-podcast-btn:hover {
+    background-color: #666666;
+}
+
+.add-podcast-btn:active {
+    background-color: #808080;
+}
+
+.podcast-blox {
+    min-width: 510px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.podcast-block {
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+    background-color: #ececec;
+    border-radius: 5px;
+    -webkit-box-shadow: 6px 6px 12px -6px black;
+    -moz-box-shadow: 6px 6px 12px -6px black;
+    box-shadow: 6px 6px 12px -6px black;
+}
+
+.podcast-block:hover {
+    background-color: #d4d4d4;
+}
+
+.podcast-img {
+    height: 200px;
+    width: 200px;
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.podcast-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.podcast-title {
+    font-size: 2rem;
+}
+
+.podcast-count-episod {
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+.podcast-count-episod::after {
+    content: 'episods';
+}
+
+a {
+    color: black;
+}
+
+#input-form {
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.input-block {
+    width: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-title {
+    font-size: 2rem;
+}
+
+.input-text {
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    font-size: 2rem;
+    border: 1px solid black;
+    padding: 0 5px 0 5px;
+}
+
+.input-img {
+    cursor: pointer;
+    color: black;
+    height: 30px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 100px;
+    font-size: 1rem;
+    border-radius: 2px;
+    color: transparent;
+    position: relative;
+    z-index: 3;
+}
+
+.input-img-text {
+    pointer-events: none;
+    padding: 2px;
+    font-size: 2rem;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 4;
+}
+
+.input-img-hidden {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 2;
+}
+
+.input-description {
+    resize: vertical;
+    width: 300px;
+    max-height: 500px;
+    min-height: 100px;
+    font-size: 2rem;
+}
+
+.create-title {
+    font-size: 2rem;
+}
+
+.create-btn {
+    cursor: pointer;
+    margin-top: 10px;
+    height: 3rem;
+    width: 15rem;
+    background-color: #d2ffcc;
+    text-align: center;
+    font-size: 2.3rem;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.create-btn:hover {
+    background-color: #bcffb2;
+}
+
+.create-btn:active {
+    background-color: #e8ffe5;
+}
+
+#input-answ {
+    font-size: 2rem;
+    color: red;
+}

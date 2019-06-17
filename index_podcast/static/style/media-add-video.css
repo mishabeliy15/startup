@@ -1,0 +1,62 @@
+@media screen and (orientation: portrait) {
+    html {
+        font-size: 1.5vh;
+    }
+
+    header {
+        height: 100px;
+    }
+
+    select {
+        font: 300 1.5rem/1.5 'Roboto', sans-serif;
+    }
+
+    .header-center {
+        margin: 0 5px 0 5px;
+        flex-grow: 2;
+    }
+
+    .header-right {
+        font-size: 0.5rem;
+        flex-grow: 5;
+    }
+
+    .score-video {
+        font-size: 1.5rem;
+    }
+
+    .input-video-btn {
+        font-size: 1.5rem;
+    }
+
+    .video-blox {
+        min-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 100%);
+        grid-gap: 10px;
+        justify-content: center;
+    }
+
+    .video-block {
+        transition: 0.2s;
+        cursor: pointer;
+        background-color: #ececec;
+        height: auto;
+        width: 100%;
+        min-width: 510px;
+    }
+
+    .video-img-block {
+        height: 300px;
+        position: relative;
+    }
+
+    .video-time {
+        max-width: 220px;
+    }
+
+    .podcast-block-btn div {
+        height: 80px;
+        width: 80px;
+    }
+}

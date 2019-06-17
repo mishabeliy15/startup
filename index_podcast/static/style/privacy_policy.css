@@ -1,0 +1,27 @@
+.privacy-block {
+    padding-bottom: 20px;
+    background-color: #e5e5e5;
+    -webkit-box-shadow: 10px 15px 20px -10px black;
+    -moz-box-shadow: 10px 15px 20px -10px black;
+    box-shadow: 10px 15px 20px -10px black;
+}
+
+.privacy-titel {
+    padding-top: 20px;
+    margin: 20px;
+}
+
+.privacy-text {
+    text-align: justify;
+    font-size: 20px;
+    margin: 10px 30px 0px 30px;
+}
+
+.privacy-text li {
+    margin: 5px 0 0 20px;
+    list-style-type: circle;
+}
+
+p {
+    text-indent: 1.5em;
+}

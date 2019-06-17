@@ -4,7 +4,7 @@ from .services import download_audio_thread, user_directory_path_audio
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/podcast_{1}/img/{2}'.format(instance.owner.id, instance.id, filename)
+    return 'user_{0}/podcast/img/{2}'.format(instance.owner.id, instance.id, filename)
 
 
 class Podcast(models.Model):
