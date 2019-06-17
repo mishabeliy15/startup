@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .api_view import api_view_my_videos, PodcastViewSet, EpisodeViewSet
+from .api_views import api_view_my_videos, PodcastViewSet, EpisodeViewSet
 from .views import PodcastListView, AddEpisodeView
 
 app_name = 'mypodcasts'

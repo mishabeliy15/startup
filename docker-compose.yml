@@ -6,8 +6,8 @@ services:
     command: ["gunicorn", "--chdir", "index_podcast", "--bind", ":8000", "index_podcast.wsgi:application"]
     volumes:
       - .:/opt/services/djangoapp/src
-      - static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
-      - media_volume:/opt/services/djangoapp/media  # <-- bind the media volume
+      - ./static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
+      - ./media_volume:/opt/services/djangoapp/media  # <-- bind the media volume
     networks:
       - nginx_network
       - database1_network
@@ -21,8 +21,8 @@ services:
       - 443:443
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
-      - media_volume:/opt/services/djangoapp/media  # <-- bind the media volume
+      - ./static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
+      - ./media_volume:/opt/services/djangoapp/media  # <-- bind the media volume
     depends_on:
       - djangoapp
     networks:

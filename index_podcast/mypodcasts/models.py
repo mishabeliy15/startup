@@ -4,7 +4,7 @@ from .services import download_audio_thread, user_directory_path_audio
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/podcast/img/{2}'.format(instance.owner.id, instance.id, filename)
+    return 'user_{0}/podcasts/img/{2}'.format(instance.owner.id, instance.id, filename)
 
 
 class Podcast(models.Model):
@@ -22,7 +22,7 @@ class Episode(models.Model):
     owner = models.ForeignKey('myauth.User', on_delete=models.CASCADE)
     podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
-    video_id = models.CharField(max_length=64)
+    video_id = models.CharField(max_length=64, unique=True)
     audio_file = models.FileField(upload_to=user_directory_path_audio, blank=True)
     image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     description = models.TextField(blank=True)

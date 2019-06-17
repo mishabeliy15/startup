@@ -169,6 +169,10 @@ STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'static')
 # do the same for media files, it must match /opt/services/djangoapp/media/
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'media')
 
+LOGIN_URL = "/"
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 try:
     from .local_settings import *
 except ImportError:

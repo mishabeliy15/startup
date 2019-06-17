@@ -9,3 +9,5 @@ index_podcast/local_settings.py
 index_podcast/db.sqlite3
 media/
 index_podcast/index_podcast/local_settings.py
+media_volume/
+static_volume

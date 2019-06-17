@@ -5,7 +5,7 @@ import os
 
 
 def user_directory_path_audio(instance, filename):
-    return 'user_{0}/audios/{1}'.format(instance.owner.id, filename)
+    return 'user_{0}/podcast_{1}/audios/{2}'.format(instance.owner.id, instance.podcast.id, filename)
 
 
 def iso_duration_to_seconds(s):
