@@ -127,7 +127,7 @@ header {
 }
 
 .podcast-count-episod::after {
-    content: 'episods';
+    content: 'episodes';
 }
 
 a {
