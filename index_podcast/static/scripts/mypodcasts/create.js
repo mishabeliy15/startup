@@ -28,6 +28,7 @@ function drawPodcastBlock(item) {
                                     ${item.title}
                                 </div>
                                 <div class="podcast-count-episod">
+                                    ${item.episodes.length}
                                 </div>
                             </div>
                         </div>
@@ -134,7 +135,6 @@ function sendAddPodcast(item) {
         processData: false,
         success: (response) => {
             console.log(response);
-            alert("Podcast has been created!");
             getAndDraw();
         },
         error: (response) => {

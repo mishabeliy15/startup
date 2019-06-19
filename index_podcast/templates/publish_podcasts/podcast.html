@@ -30,13 +30,13 @@
             </div>
         </div>
         <div class="podcast-content">
-            {% for episode in object.episodes.all reversed %}
+            {% for episode in object.episodes.all|dictsort:"created_date" reversed %}
                 <div class="podcast-episod">
                     <div class="episod-count">
                         {{ forloop.revcounter }}
                     </div>
                     <div class="episod-play">
-                        <div class="btn-paly icon-play">
+                        <div class="btn-paly icon-play" id="{{ forloop.counter0 }}">
                         </div>
                     </div>
                     <div class="episod-text">
@@ -54,17 +54,8 @@
 {% endblock content %}
 {% block js %}
     <script type="text/javascript">
-        $('.btn-paly').on('click', function (event) {
-            event.preventDefault();
-            $(this).toggleClass('icon-play');
-            $(this).toggleClass('icon-pause');
-        });
-
-        const user_id = {{ object.owner.id }};
-
-        $.getJSON("/mypodcasts/api/podcasts/",{
-                'user_id':user_id
-            }, (data) => console.log(data));
-
+        const USER_ID = {{ object.owner.id }};
+        const PODCAST_ID = {{ object.id }};
     </script>
+    <script type="text/javascript" src="{% static 'scripts/publish/podcast.js' %}"></script>
 {% endblock js %}
