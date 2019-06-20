@@ -7,13 +7,13 @@
         <title>{{ object.title }}</title>
         <googleplay:author>{{ object.author }}</googleplay:author>
         <itunes:author>{{ object.author }}</itunes:author>
-        <description>{{ object.descriptioon }}</description>
-        <googleplay:description>{{ object.descriptioon }}</googleplay:description>
-        <itunes:summary>{{ object.descriptioon }}</itunes:summary>
+        <description>{{ object.description }}</description>
+        <googleplay:description>{{ object.description }}</googleplay:description>
+        <itunes:summary>{{ object.description }}</itunes:summary>
         <googleplay:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
         <itunes:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
         <link>{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
-        {% for episode in object.episodes.all reversed %}
+        {% for episode in object.episodes.all|dictsort:"created_date" reversed %}
             <item>
                 <title>{{ episode.title }}</title>
                 <description>{{ episode.description }}</description>
