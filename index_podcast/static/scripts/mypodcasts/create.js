@@ -15,7 +15,7 @@ function restorePodcastHeader() {
 }
 
 function get_podcast_url(item) {
-    return `/podcasts/user_${ item.owner }/${ item.id }/`
+    return `/podcasts/user_${item.owner}/${item.id}/`
 }
 
 function drawPodcastBlock(item) {
@@ -45,7 +45,7 @@ function drawAddInputs(item) {
                 `;
 }
 
-function drawPodcasts(items=podcast_list.results) {
+function drawPodcasts(items = podcast_list.results) {
     container = document.getElementById('podcast-list');
     container.innerHTML = '';
     let find = new RegExp($("#search-request")[0].value, "i");
@@ -63,6 +63,19 @@ function getAndDraw() {
     });
 }
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img-preview').attr('src', e.target.result);
+            $('#img-preview').show();
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 function addPodcast() {
     input_titles = ['Title', 'Author'];
     content = $('.content');
@@ -77,9 +90,10 @@ function addPodcast() {
                         <div class="input-title">Сover :</div>
                         <div class="input-img">
                             <div class="input-img-text">Get a picture</div>
-                            <input name="image" id="input-img" class="input-img-hidden" type="file" name="photo" accept="image/jpeg" alt="success" required/>
+                            <input name="image" id="input-img" class="input-img-hidden" type="file" name="photo" accept="image/*" alt="success" required/>
                         </div>
                     </div>
+                    <img class="input-block" style="display: none" id="img-preview" alt="Your cover" width="200px" height="200px" />
                  </div>
                 </form>`;
     content = document.getElementById('input-form');
@@ -92,6 +106,10 @@ function addPodcast() {
                 <div id="input-answ"></div>
                 <button type=submit class="create-btn">Create</button>
                 `;
+
+    $("#input-img").on('change', function () {
+        readURL(this);
+    });
 }
 
 function submitForm() {
