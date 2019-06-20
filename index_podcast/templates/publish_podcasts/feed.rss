@@ -12,6 +12,7 @@
         <itunes:image href="https://{{ request.get_host }}{{ media }}{{ object.image }}"/>
         <link>https://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
         <language>{{ object.language }}</language>
+        <itunes:category text="{{ object.category }}"/>
         <itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% for episode in object.episodes.all|dictsort:"created_date" reversed %}
         <item>
             <title>{{ episode.title }}</title>
