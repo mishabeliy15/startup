@@ -13,15 +13,15 @@
         <link>https://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
         <language>{{ object.language }}</language>
         <itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% for episode in object.episodes.all|dictsort:"created_date" reversed %}
-            <item>
-                <title>{{ episode.title }}</title>
-                <description>{{ episode.description }}</description>
-                <googleplay:description>{{ episode.description }}</googleplay:description>
-                <itunes:summary>{{ episode.description }}</itunes:summary>
-                <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s" }} GMT</pubDate>
-                <enclosure url="https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
-                           type="audio/x-m4a" length="{{ episode.audio_file.size }}"/>
-                <itunes:duration>{{ episode.duration }}</itunes:duration>
-            </item>{% endfor %}
+        <item>
+            <title>{{ episode.title }}</title>
+            <description>{{ episode.description }}</description>
+            <googleplay:description>{{ episode.description }}</googleplay:description>
+            <itunes:summary>{{ episode.description }}</itunes:summary>
+            <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s" }} GMT</pubDate>
+            <enclosure url="https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
+                       type="audio/x-m4a" length="{{ episode.audio_file.size }}"/>
+            <itunes:duration>{{ episode.duration }}</itunes:duration>
+        </item>{% endfor %}
     </channel>
 </rss>
