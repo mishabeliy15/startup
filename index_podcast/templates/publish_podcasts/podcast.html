@@ -3,7 +3,7 @@
 {% block head %}
     <link type="application/rss+xml" rel="alternate"
       title="{{ object.title }}"
-          href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"/>
+          href="https://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"/>
     <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Ramabhadra|Righteous&display=swap" rel="stylesheet">
 {% endblock head %}

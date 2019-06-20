@@ -10,9 +10,9 @@
         <description>{{ object.description }}</description>
         <googleplay:description>{{ object.description }}</googleplay:description>
         <itunes:summary>{{ object.description }}</itunes:summary>
-        <googleplay:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
-        <itunes:image href="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ object.image }}"/>
-        <link>{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
+        <googleplay:image href="https://{{ request.get_host }}{{ media }}{{ object.image }}"/>
+        <itunes:image href="https://{{ request.get_host }}{{ media }}{{ object.image }}"/>
+        <link>https://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
         {% for episode in object.episodes.all|dictsort:"created_date" reversed %}
             <item>
                 <title>{{ episode.title }}</title>
@@ -20,7 +20,7 @@
                 <googleplay:description>{{ episode.description }}</googleplay:description>
                 <itunes:summary>{{ episode.description }}</itunes:summary>
                 <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s O" }}</pubDate>
-                <enclosure url="{{ request.scheme }}://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
+                <enclosure url="https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
                            type="audio/mpeg" length="{{ episode.audio_file.size }}"/>
                 <itunes:duration>{{ episode.duration }}</itunes:duration>
             </item>
