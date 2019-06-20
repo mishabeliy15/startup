@@ -1,5 +1,6 @@
 from django.db import models
 from .services import download_audio_thread, user_directory_path_audio
+from django.contrib.postgres.fields import ArrayField
 
 
 def user_directory_path(instance, filename):
@@ -13,6 +14,9 @@ class Podcast(models.Model):
     image = models.ImageField(upload_to=user_directory_path, blank=True)
     description = models.TextField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=128, blank=True)
+    explicit = models.BooleanField(default=False)
+    language = models.CharField(max_length=6, default="en")
 
     def __str__(self):
         return self.title
