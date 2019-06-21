@@ -87,6 +87,7 @@ header {
 }
 
 .podcast-block {
+    position: relative;
     display: flex;
     flex-direction: column;
     transition: 0.2s;
@@ -95,6 +96,10 @@ header {
     -webkit-box-shadow: 6px 6px 12px -6px black;
     -moz-box-shadow: 6px 6px 12px -6px black;
     box-shadow: 6px 6px 12px -6px black;
+}
+
+.podcast-block:hover .edit-podcast-btns {
+    display: flex;
 }
 
 .podcast-block:hover {
@@ -130,6 +135,47 @@ header {
     content: 'episodes';
 }
 
+.edit-podcast-btns {
+    transition: 0.2s;
+    display: none;
+    top: 0;
+    right: 0;
+    position: absolute;
+    flex-direction: row;
+}
+
+.edit-podcast-btns div {
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+}
+
+.edit-podcast-btn {}
+
+.view-podcast-btn {
+    background-color: #d2ffcc;
+}
+
+.view-podcast-btn:hover {
+    background-color: #bcffb2;
+}
+
+.view-podcast-btn:active {
+    background-color: #e8ffe5;
+}
+
+.edit-podcast-btn {
+    background-color: #fffccc;
+}
+
+.edit-podcast-btn:active {
+    background-color: #fffbb2;
+}
+
+.edit-podcast-btn:hover {
+    background-color: #fffde5;
+}
+
 a {
     color: black;
 }
@@ -153,6 +199,11 @@ a {
 
 .input-title {
     font-size: 2rem;
+}
+
+.input-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.6;
 }
 
 .input-text {
@@ -201,6 +252,18 @@ a {
     width: 100%;
     opacity: 0;
     z-index: 2;
+}
+
+.img-preview {
+    width: 300px;
+    height: 300px;
+    background-size: 100% cover;
+}
+
+select {
+    width: 200px;
+    height: 30px;
+    font-size: 2rem;
 }
 
 .input-description {
