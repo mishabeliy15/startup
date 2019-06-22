@@ -1,0 +1,172 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>{{ object.title }}</title>
+        <link rel="stylesheet" href="{% static 'style/null.css' %}">
+        <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
+        <link rel="stylesheet" href="{% static 'style/media-podcast.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="blur-block-header">
+            <div class="blur-blur"></div>
+            <div class="blur-transparency white"></div>
+            <div class="blur-conteiner podcast_header">
+                <div class="podcast_block">
+                    <div class="podcast_block_img">
+                        <img class="podcast_block_img-img" src="{{ MEDIA_PREFIX }}{{ object.image }}" alt="podcast image">
+                    </div>
+                    <div class="podcast_block_info">
+                        <div class="podcast_block_authot">
+                            {{ object.author }}
+                        </div>
+                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}">
+                            RSS
+                        </a>
+                        <div class="podcast_block_name">
+                            {{ object.title }}
+                        </div>
+                        <div class="podcast_block_episods">
+                            {{ object.episodes.count }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blur-block-content">
+            <div class="blur-blur blur-blur-content"></div>
+            <div class="blur-transparency black"></div>
+            <div class="blur-conteiner content" id="content">
+            </div>
+
+            <footer>
+                <address class="footer-text">
+                    © 2019 Video2Cast.com
+                    <nav>
+                        <a href="{% url 'privacy_policy' %}">Privacy policy</a>
+                    </nav>
+                </address>
+            </footer>
+
+
+            <div class="window_remove display_none">
+                <div class="window_remove_hidden"></div>
+                <div class="window_remove_content">
+                    <div class="window_remove_text">
+                        Do you really want to delete this episode? This action cannot be undone!
+                    </div>
+                    <div class="window_remove_group_button">
+                        <div class="window_remove_button_apply">
+                            Delete
+                        </div>
+                        <div class="window_remove_button_cancel">
+                            Cancel
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- подключаем все скрипты -->
+            <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
+            <script type="text/javascript">
+                const USER_ID = {{ object.owner.id }};
+                const PODCAST_ID = {{ object.id }};
+
+                function drowEpisodEdit(item) {
+                    return `
+                        <div class="episode_content">
+                            <div class="episode_content_title">
+                                <input class="input-title" type="text" name="title" />
+                                <div class="episode_content_liner"></div>
+                            </div>
+                            <textarea class="input-description" name="episod_more" rows="10" cols="80" value="">
+                                Some brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief information
+                            </textarea>
+                        </div>
+                        <div class="episode_action_btn">
+                            <div class="btn-confirm">
+
+                            </div>
+                            <div class="btn-cancel">
+
+                            </div>
+                            <div class="btn-delete">
+
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function play_episod() {
+                    let contain = document.getElementById("content");
+                    for (let i = 0; i < 2; i++) {
+                        contain.innerHTML += `
+                            <div class="podcast_episode">
+                                ${drowEpisodEdit()}
+                            </div>
+                        `;
+                    }
+                    btn_edit();
+                }
+
+                function btn_edit() {
+                    $('.btn-cancel').on('click', function(event) {
+                        event.preventDefault();
+                        index = $('.btn-cancel').index(this);
+                        console.log(index);
+                        episode_block = $('.podcast_episode');
+                        console.log(episode_block);
+                        episode_block[index].innerHTML = `${drowEpisodEdit()}`;
+                        console.log(episode_block[index]);
+                        btn_edit();
+                    });
+
+
+                    $('.btn-confirm').on('click', function(event) {
+                        event.preventDefault();
+                        index = $('.btn-confirm').index(this);
+                        description = $('.input-description')[index].value;
+                        title = $('.input-title')[index].value;
+                        if (description != '' && title != '') {
+                            console.log(title, ' ', description);
+                        } else {
+
+                        }
+                    });
+
+
+                    $('.btn-delete').on('click', function(event) {
+                        event.preventDefault();
+                        $('.window_remove').toggleClass('display_none');
+                        $('.window_remove').toggleClass('display_block');
+
+                        btn_delete();
+                    });
+                }
+
+                function btn_delete() {
+                    $('.window_remove_button_apply').on('click', function(event) {
+                        event.preventDefault();
+                        //удалить подкаст из списка
+                        location.reload();
+                    });
+
+
+                    $('.window_remove_button_cancel').on('click', function(event) {
+                        event.preventDefault();
+                        $('.window_remove').toggleClass('display_none');
+                        $('.window_remove').toggleClass('display_block');
+                        btn_edit();
+                    });
+                }
+
+                play_episod();
+            </script>
+    </body>
+
+</html>

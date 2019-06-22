@@ -17,6 +17,9 @@ function restorePodcastHeader() {
 function get_podcast_url(item) {
     return `/podcasts/user_${item.owner}/${item.id}/`;
 }
+function get_podcast_edit_url(item) {
+    return `/mypodcasts/${item.id}/`;
+}
 
 function drawPodcastBlock(item) {
     return `
@@ -36,7 +39,7 @@ function drawPodcastBlock(item) {
                 <a href="${get_podcast_url(item)}">
                     <div class="view-podcast-btn"></div>
                 </a>
-                <a href="#">
+                <a href="${get_podcast_edit_url(item)}">
                     <div class="edit-podcast-btn"></div>
                 </a>
             </div>
