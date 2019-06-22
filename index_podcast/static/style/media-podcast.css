@@ -48,4 +48,38 @@
     .episode_content_description_btn {
         height: 100px;
     }
+
+
+    /*  */
+    .window_title {
+        font-size: 1.7rem;
+    }
+    .window_remove_content-rss {
+        font-size: 1.5rem;
+    }
+    .window_rss {
+        font-size: 1.5rem;
+    }
+
+    .window_field {
+        flex-direction: column;
+    }
+    .btn-link {
+        height: 100px;
+        width: 100px;
+    }
+    .btn_close{
+        height: 100px;
+        width: 100px;
+    }
+
+    .btn_add_episods{
+        height: 100px;
+        width: 90%;
+        padding: 15px;
+    }
+    .rss_link {
+        border: 1px solid black;
+        width: 90%;
+    }
 }

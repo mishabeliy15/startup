@@ -28,9 +28,6 @@
                         <div class="podcast_block_authot">
                             {{ object.author }}
                         </div>
-                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}">
-                            RSS
-                        </a>
                         <div class="podcast_block_name">
                             {{ object.title }}
                         </div>

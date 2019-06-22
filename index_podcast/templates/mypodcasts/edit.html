@@ -24,9 +24,9 @@
                         <div class="podcast_block_authot">
                             {{ object.author }}
                         </div>
-                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}">
+                        <div id="rss">
                             RSS
-                        </a>
+                        </div>
                         <div class="podcast_block_name">
                             {{ object.title }}
                         </div>
@@ -54,8 +54,8 @@
 
 
             <div class="window_remove display_none">
-                <div class="window_remove_hidden"></div>
-                <div class="window_remove_content">
+                <div class="window_remove_hidden-rss"></div>
+                <div class="window_remove_content-rss">
                     <div class="window_remove_text">
                         Do you really want to delete this episode? This action cannot be undone!
                     </div>
@@ -70,6 +70,43 @@
                 </div>
             </div>
 
+            <div class="window_rss display_none">
+                <div class="window_remove_hidden"></div>
+                <div class="window_remove_content">
+                    <div class="window_field-row">
+                        <div class="window_title">
+                            Podcast was created successfully!
+                        </div>
+                        <div class="btn_close">X</div>
+                    </div>
+                    <div class="window_field">
+                        <div class="">
+                            To index a podcast, first you must add an episode to the podcast:
+                        </div>
+                        <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
+                    </div>
+                    <div class="window_field">
+                        <div class="">
+                            This is your link to the RSS podcast:
+                        </div>
+                        <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
+                    </div>
+                    <div class="">
+                        You can add your podcast to these services:
+                    </div>
+                    <div class="window_group_buttons">
+                        <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
+                            <div class="apple-logo"></div>
+                        </a>
+                        <a class="btn-link" href="" target="_blank">
+                            <div class="google-logo"></div>
+                        </a>
+                        <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
+                            <div class="spotify-logo"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <!-- подключаем все скрипты -->
             <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
@@ -104,6 +141,7 @@
 
                 function play_episod() {
                     let contain = document.getElementById("content");
+                    contain.innerHTML = ``;
                     for (let i = 0; i < 2; i++) {
                         contain.innerHTML += `
                             <div class="podcast_episode">
@@ -111,7 +149,6 @@
                             </div>
                         `;
                     }
-                    btn_edit();
                 }
 
                 function btn_edit() {
@@ -123,7 +160,6 @@
                         console.log(episode_block);
                         episode_block[index].innerHTML = `${drowEpisodEdit()}`;
                         console.log(episode_block[index]);
-                        btn_edit();
                     });
 
 
@@ -147,9 +183,34 @@
 
                         btn_delete();
                     });
-                }
 
-                function btn_delete() {
+                    $("#rss").on('click', function(event) {
+                        event.preventDefault();
+                        $('.window_rss').toggleClass('display_none');
+                        $('.window_rss').toggleClass('display_block');
+                        console.log('0000000');
+                    });
+
+
+                    $('.rss_link').on('click', function(event) {
+                        event.preventDefault();
+                        console.log(1);
+                        let rss_link = $('.rss_link')[0];
+                        rss_link.select();
+                        document.execCommand("copy");
+                    });
+                    $('.btn_close').on('click', function(event) {
+                        event.preventDefault();
+                        console.log(2);
+                        $('.window_rss').toggleClass('display_none');
+                        $('.window_rss').toggleClass('display_block');
+                    });
+                    $('.btn_add_episods').on('click', function(event) {
+                        event.preventDefault();
+                        console.log(3);
+                        location.href = `/mypodcasts/add-episodes/?podcast=${CREATED_PODCAST.id}`;
+                    });
+
                     $('.window_remove_button_apply').on('click', function(event) {
                         event.preventDefault();
                         //удалить подкаст из списка
@@ -161,11 +222,65 @@
                         event.preventDefault();
                         $('.window_remove').toggleClass('display_none');
                         $('.window_remove').toggleClass('display_block');
-                        btn_edit();
                     });
                 }
 
+                function btn_delete() {
+                }
+
+
+                function successfully_created() {
+                    let content = document.getElementById("content");
+                    console.log(content);
+                    content.innerHTML = `
+                        <div class="window_remove">
+                            <div class="window_remove_hidden"></div>
+                            <div class="window_remove_content">
+                                <div class="window_field">
+                                    <div class="window_title">
+                                        Podcast was created successfully!
+                                    </div>
+                                    <div class="btn_close">X</div>
+                                </div>
+                                <div class="window_field">
+                                    <div class="">
+                                        To index a podcast, first you must add an episode to the podcast:
+                                    </div>
+                                    <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
+                                </div>
+                                <div class="window_field">
+                                    <div class="">
+                                        This is your link to the RSS podcast:
+                                    </div>
+                                    <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
+                                </div>
+                                <div class="">
+                                    You can add your podcast to these services:
+                                </div>
+                                <div class="window_group_buttons">
+                                    <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
+                                        <div class="apple-logo"></div>
+                                    </a>
+                                    <a class="btn-link" href="" target="_blank">
+                                        <div class="google-logo"></div>
+                                    </a>
+                                    <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
+                                        <div class="spotify-logo"></div>
+                                    </a>
+                                </div>
+                                <div class="">
+                                    You can find these instructions on the podcast edit page.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function whait_click_window() {
+                }
+
                 play_episod();
+                btn_edit();
             </script>
     </body>
 

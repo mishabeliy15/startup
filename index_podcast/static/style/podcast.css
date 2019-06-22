@@ -73,6 +73,10 @@ body, .blur-blur::before {
     flex-direction: column;
 }
 
+.rss {
+    font-size: 1.3rem;
+}
+
 .podcast_block {
     height: 500px;
     display: flex;
@@ -239,12 +243,11 @@ body, .blur-blur::before {
 }
 
 .episode_action_btn {
-    position: absolute;
     display: flex;
     flex-direction: column;
     bottom: 100% 0;
     right: 10px;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .episode_action_btn div {
@@ -312,7 +315,7 @@ body, .blur-blur::before {
 
 .input-description {
     resize: vertical;
-    width: 660px;
+    width: 100%;
 }
 
 .window_remove {
@@ -398,4 +401,135 @@ body, .blur-blur::before {
     height: 100%;
     width: 100%;
     z-index: 1;
+}
+
+.window_rss {
+    font-size: 20px;
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.window_remove_hidden-rss {
+    background-color: black;
+    opacity: 0.6;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 6;
+}
+
+.window_remove_content-rss {
+    z-index: 7;
+    top: 25%;
+    right: 10%;
+    bottom: 25%;
+    left: 10%;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 5% 10px 5%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    font-size: 40px;
+}
+
+.window_field {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.window_field-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn_close {
+    vertical-align: middle;
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.btn_add_episods{
+    background-color: #d2ffcc;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    color: black;
+    border: none;
+}
+
+.btn_add_episods:active {
+    background-color: #e8ffe5;
+}
+
+.btn_add_episods:hover{
+    background-color: #bcffb2;
+}
+
+.window_title {
+    font-size: 44px;
+    width: 100%;
+    text-align: center;
+}
+
+.window_group_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-link {
+    height: 75px;
+    width: 75px;
+    margin: 0 5px 0 5px;
+    border-radius: 5px;
+    border: 0.5px solid black;
+    background-color: green;
+}
+
+.btn-link div {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+}
+
+.rss_link {
+    width: 50%;
+}
+
+#rss {
+    font-size: 2rem;
+}
+
+.apple-logo {
+    background-image: url('../image/apple-podcast-logo.jpg');
+}
+
+.google-logo {
+    background-image: url('../image/google-podcast-logo.png');
+}
+
+.spotify-logo {
+    background-image: url('../image/spotify-podcast-logo.jpg');
 }
