@@ -196,6 +196,54 @@ function submitForm() {
     }
 }
 
+function successfully_created() {
+    content = $(".content")[0];
+    console.log(content);
+    content.innerHTML += `
+        <div class="window_remove">
+            <div class="window_remove_hidden"></div>
+            <div class="window_remove_content">
+                <div class="window_field">
+                    <div class="window_title">
+                        Podcast was created successfully!
+                    </div>
+                    <div class="btn_close">X</div>
+                </div>
+                <div class="window_field">
+                    <div class="">
+                        To index a podcast, first you must add an episode to the podcast:
+                    </div>
+                    <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
+                </div>
+                <div class="window_field">
+                    <div class="">
+                        This is your link to the RSS podcast:
+                    </div>
+                    <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
+                </div>
+                <div class="">
+                    You can add your podcast to these services:
+                </div>
+                <div class="window_group_buttons">
+                    <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
+                        <div class="apple-logo"></div>
+                    </a>
+                    <a class="btn-link" href="" target="_blank">
+                        <div class="google-logo"></div>
+                    </a>
+                    <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
+                        <div class="spotify-logo"></div>
+                    </a>
+                </div>
+                <div class="">
+                    You can find these instructions on the podcast edit page.
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+let CREATED_PODCAST = null;
 function sendAddPodcast(item) {
     let formData = new FormData();
     for (let i in item) formData.append(i, item[i]);
@@ -208,11 +256,32 @@ function sendAddPodcast(item) {
         processData: false,
         success: response => {
             console.log(response);
-            getAndDraw();
+            CREATED_PODCAST = response;
+            successfully_created();
+            whait_click_window();
         },
         error: response => {
             console.log(response);
         }
+    });
+}
+
+function whait_click_window() {
+    console.log(1);
+    $('.rss_link').on('click', function(event) {
+        event.preventDefault();
+        let rss_link = $('.rss_link')[0];
+        rss_link.select();
+        document.execCommand("copy");
+    });
+    $('.btn_close').on('click', function(event) {
+        event.preventDefault();
+        getAndDraw();
+        console.log(2);
+    });
+    $('.btn_add_episods').on('click', function(event) {
+        event.preventDefault();
+        location.href = `/mypodcasts/add-episodes/?podcast=${CREATED_PODCAST.id}`;
     });
 }
 
