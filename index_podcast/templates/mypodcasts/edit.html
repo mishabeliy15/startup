@@ -94,7 +94,7 @@
                         <div class="">
                             This is your link to the RSS podcast:
                         </div>
-                        <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
+                        <input class="rss_link" type="text" name="RSS link" value="https://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}" readonly>
                     </div>
                     <div class="">
                         You can add your podcast to these services:
@@ -103,7 +103,7 @@
                         <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
                             <div class="apple-logo"></div>
                         </a>
-                        <a class="btn-link" href="" target="_blank">
+                        <a class="btn-link" href="https://search.google.com/devtools/podcast/preview" target="_blank">
                             <div class="google-logo"></div>
                         </a>
                         <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
@@ -119,15 +119,17 @@
             <script src="{% static 'scripts/main.js' %}"></script>
             <script type="text/javascript" src="{% static 'scripts/mypodcasts/apis.js' %}"></script>
             <script type="text/javascript">
+                let podcast = null;
+
                 function drowEpisodEdit(item) {
                     return `
                         <div class="episode_content">
                             <div class="episode_content_title">
-                                <input class="input-title" type="text" name="title" />
+                                <input class="input-title" value="${item.title}" type="text" name="title"/>
                                 <div class="episode_content_liner"></div>
                             </div>
                             <textarea class="input-description" name="episod_more" rows="10" cols="80" value="">
-                                Some brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief information
+                                ${item.description}
                             </textarea>
                         </div>
                         <div class="episode_action_btn">
@@ -144,13 +146,13 @@
                     `;
                 }
 
-                function play_episod() {
+                function play_episod(items=podcast) {
                     let contain = document.getElementById("content");
                     contain.innerHTML = ``;
-                    for (let i = 0; i < 2; i++) {
+                    for (let i = 0; i < items.episodes.length; i++) {
                         contain.innerHTML += `
                             <div class="podcast_episode">
-                                ${drowEpisodEdit()}
+                                ${drowEpisodEdit(items.episodes[i])}
                             </div>
                         `;
                     }
@@ -159,67 +161,69 @@
                 function btn_edit() {
                     $('.btn-cancel').on('click', function(event) {
                         event.preventDefault();
-                        index = $('.btn-cancel').index(this);
+                        let index = $('.btn-cancel').index(this);
                         console.log(index);
-                        episode_block = $('.podcast_episode');
-                        console.log(episode_block);
-                        episode_block[index].innerHTML = `${drowEpisodEdit()}`;
-                        console.log(episode_block[index]);
+                        let episode_block = $('.podcast_episode');
+                        episode_block[index].innerHTML = `${drowEpisodEdit(podcast.episodes[index])}`;
                     });
 
 
                     $('.btn-confirm').on('click', function(event) {
                         event.preventDefault();
-                        index = $('.btn-confirm').index(this);
-                        description = $('.input-description')[index].value;
-                        title = $('.input-title')[index].value;
+                        let index = $('.btn-confirm').index(this);
+                        let description = $('.input-description')[index].value;
+                        let title = $('.input-title')[index].value;
                         if (description != '' && title != '') {
                             console.log(title, ' ', description);
+                            podcast.episodes[index].title = title;
+                            podcast.episodes[index].description = description;
+                            PatchEpisode(podcast.episodes[index].id,{
+                                'title':title,
+                                'description':description
+                            });
                         } else {
 
                         }
                     });
 
 
+                    let id_del = null;
+
                     $('.btn-delete').on('click', function(event) {
                         event.preventDefault();
                         $('.window_remove').toggleClass('display_none');
                         $('.window_remove').toggleClass('display_block');
-
-                        btn_delete();
+                        id_del = $('.btn-delete').index(this);
+                        console.log(id_del);
                     });
 
                     $("#rss").on('click', function(event) {
                         event.preventDefault();
                         $('.window_rss').toggleClass('display_none');
                         $('.window_rss').toggleClass('display_block');
-                        console.log('0000000');
                     });
 
 
                     $('.rss_link').on('click', function(event) {
                         event.preventDefault();
-                        console.log(1);
                         let rss_link = $('.rss_link')[0];
                         rss_link.select();
                         document.execCommand("copy");
                     });
                     $('.btn_close').on('click', function(event) {
                         event.preventDefault();
-                        console.log(2);
                         $('.window_rss').toggleClass('display_none');
                         $('.window_rss').toggleClass('display_block');
                     });
                     $('.btn_add_episods').on('click', function(event) {
                         event.preventDefault();
                         console.log(3);
-                        location.href = `/mypodcasts/add-episodes/?podcast=${CREATED_PODCAST.id}`;
+                        location.href = `/mypodcasts/add-episodes/?podcast=${podcast.id}`;
                     });
 
                     $('.window_remove_button_apply').on('click', function(event) {
                         event.preventDefault();
-                        //удалить подкаст из списка
-                        location.reload();
+                        DeleteEpisode(podcast.episodes[id_del].id, () => location.reload());
                     });
 
 
@@ -230,10 +234,6 @@
                     });
                 }
 
-                function btn_delete() {
-                }
-
-
                 function successfully_created() {
                     let content = document.getElementById("content");
                     console.log(content);
@@ -243,7 +243,7 @@
                             <div class="window_remove_content">
                                 <div class="window_field">
                                     <div class="window_title">
-                                        Podcast was created successfully!
+                                        Index your Podcast!
                                     </div>
                                     <div class="btn_close">X</div>
                                 </div>
@@ -281,11 +281,11 @@
                     `;
                 }
 
-                function whait_click_window() {
-                }
-
-                play_episod();
-                btn_edit();
+                GetPodcast(PODCAST_ID, response => {
+                    podcast = response;
+                    play_episod();
+                    btn_edit();
+                });
             </script>
     </body>
 

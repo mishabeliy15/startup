@@ -1,6 +1,5 @@
 from django.db import models
 from .services import download_audio_thread, user_directory_path_audio
-from django.contrib.postgres.fields import ArrayField
 
 
 def user_directory_path(instance, filename):
