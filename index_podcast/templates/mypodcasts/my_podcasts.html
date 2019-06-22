@@ -8,8 +8,7 @@
 {% endblock content %}
 {% block js %}
     <script type="text/javascript">
-        const USER_ID = {{ object.owner.id }};
-        const PODCAST_ID = {{ object.id }};
+        const USER_ID = {{ user.id }};
     </script>
     <script type="text/javascript" src="{% static 'scripts/mypodcasts/create.js' %}"></script>
 {% endblock js %}
