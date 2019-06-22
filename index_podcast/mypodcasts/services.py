@@ -38,6 +38,8 @@ def download_with_edit_model(video_id, obj):
     download_mp3_from_video("https://youtu.be/" + video_id, video_id)
     f = open(MEDIA_ROOT + '/' + video_id + '.m4a', 'rb')
     obj.audio_file.save(video_id + '.m4a', File(f))
+    obj.processed = True
+    obj.save()
     f.close()
     os.remove(MEDIA_ROOT + '/' + video_id + '.m4a')
 
