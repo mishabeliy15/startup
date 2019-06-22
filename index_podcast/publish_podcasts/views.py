@@ -4,7 +4,7 @@ from mypodcasts.models import Podcast, Episode
 
 class PodcastDetailView(DetailView):
     model = Podcast
-    template_name = 'publish_podcasts/podcast.html'
+    template_name = 'publish_podcasts/podcast-1.html'
 
     def get_queryset(self):
         return Podcast.objects.filter(owner=self.kwargs['user_id'])

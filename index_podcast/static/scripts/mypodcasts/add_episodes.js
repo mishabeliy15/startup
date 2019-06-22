@@ -154,6 +154,7 @@ function clickOnVideo(event, videos) {
                             <input id="btn-index" class="index-cast-btn" type="button" name="button search" value="index">
                         </div>
                     </header>
+                    <div id="alert-message"></div>
                 `;
 
     $(document).on("change", "#select-podcast", (e) => {
@@ -176,22 +177,22 @@ function clickOnVideo(event, videos) {
                     }, innerFunc);
                     index++;
                 } else {
-                    alert("All episodes has been added.");
+                    $('#alert-message').innerHTML = `All episodes has been added.`;
                     location.href = "/mypodcasts/"
                 }
             };
             innerFunc("init");
         } else
-            alert("You didn't choose podcast!");
+            $('#alert-message').innerHTML = `You didn't choose podcast!`;
     });
 
     let contain = document.getElementById("content");
     for (let i = 0; i < innerChooseVideo.length; i++) {
         contain.innerHTML += `
-                        <div class="podcast-block">
-                            ${drawEpisod(innerChooseVideo[i])}
-                        </div>
-                    `;
+            <div class="podcast-block">
+                ${drawEpisod(innerChooseVideo[i])}
+            </div>
+        `;
     }
     editActive();
 }
