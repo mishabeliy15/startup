@@ -22,6 +22,7 @@
             <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s" }} GMT</pubDate>
             <enclosure url="https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
                        type="audio/m4a" length="{{ episode.audio_file.size }}"/>
+            <itunes:duration>{{ episode.duration }}</itunes:duration>
             <guid isPermaLink="true">https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}</guid>
         </item>{% endfor %}
     </channel>
