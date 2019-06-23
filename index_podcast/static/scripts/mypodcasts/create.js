@@ -9,7 +9,25 @@ function restorePodcastHeader() {
         </div>
     </header>
     <div id="podcast-list" class="podcast-blox">
-    </div>`;
+    </div>
+    <div class="window_remove display_none">
+        <div class="window_remove_hidden"></div>
+        <div class="window_remove_content">
+            <div class="window_remove_text">
+                Do you really want to delete this podcast? This action cannot be undone!
+            </div>
+            <div class="window_remove_group_button">
+                <div class="window_remove_button_apply">
+                    Delete
+                </div>
+                <div class="window_remove_button_cancel">
+                    Cancel
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    buttons_dell();
     $(".add-podcast-btn").on("click", addPodcast);
     $("#search-request").bind("input", () => drawPodcasts());
 }
@@ -42,6 +60,7 @@ function drawPodcastBlock(item) {
                 <a href="${get_podcast_edit_url(item)}">
                     <div class="edit-podcast-btn"></div>
                 </a>
+                <div class="btn-delete" onclick="get_btn_dell()"></div>
             </div>
         </div>
     `;
@@ -295,4 +314,29 @@ function whait_click_window() {
     });
 }
 
+function get_btn_dell() {
+    $('.window_remove').toggleClass('display_none');
+    $('.window_remove').toggleClass('display_block');
+    id_del = $('.btn-delete').index(this);
+    console.log(id_del);
+}
+
+function buttons_dell() {
+    $('.window_remove_button_apply').on('click', function(event) {
+        event.preventDefault();
+        DeleteEpisode(podcast.episodes[id_del].id, () => {
+            block = $('.podcast_episode')[id_del];
+            block.style.display = 'none';
+            $('.window_remove').toggleClass('display_none');
+            $('.window_remove').toggleClass('display_block');
+        });
+    });
+
+
+    $('.window_remove_button_cancel').on('click', function(event) {
+        event.preventDefault();
+        $('.window_remove').toggleClass('display_none');
+        $('.window_remove').toggleClass('display_block');
+    });
+}
 $(getAndDraw);
