@@ -143,7 +143,7 @@ function clickOnVideo(event, videos) {
                         <div class="header-center">
                             <div class="select">
                                 <select id="select-podcast">
-                                    <option value="" hidden disabled selected>Coose</option>
+                                    <option value="" hidden disabled selected>Choose</option>
                                     ${PodcastsToOptionsStr()}
                                 </select>
                             </div>
