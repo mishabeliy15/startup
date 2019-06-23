@@ -202,7 +202,7 @@ function submitForm() {
     }
 }
 
-function successfully_created() {
+function successfully_created(response) {
     content = $(".content")[0];
     console.log(content);
     content.innerHTML += `
@@ -225,7 +225,7 @@ function successfully_created() {
                     <div class="">
                         This is your link to the RSS podcast:
                     </div>
-                    <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
+                    <input class="rss_link" type="text" name="RSS link" value="${"https://video2cast.com" + get_podcast_url(response) + "rss/"}" readonly>
                 </div>
                 <div class="">
                     You can add your podcast to these services:
@@ -263,7 +263,7 @@ function sendAddPodcast(item) {
         success: response => {
             console.log(response);
             CREATED_PODCAST = response;
-            successfully_created();
+            successfully_created(response);
             whait_click_window();
         },
         error: response => {
