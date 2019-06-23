@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from  .models import Podcast
+from .models import Podcast
 
 
 class PodcastListView(LoginRequiredMixin, TemplateView):
