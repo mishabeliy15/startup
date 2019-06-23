@@ -1,31 +1,87 @@
 {% extends 'main.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/media-main.css' %}">
+{% endblock head %}
 {% block content %}
     {% if user.is_authenticated  %}
-        Hello {{ user.first_name }} {{ user.last_name }}!
+        <div class="feed-box">
+            <div class="feed-title">
+                Index:
+            </div>
+            <div class="feed index_">
+
+            </div>
+        </div>
+        <div class="feed-box">
+            <div class="feed-title">
+                New:
+            </div>
+            <div class="feed new_">
+
+            </div>
+        </div>
     {% endif %}
 {% endblock content %}
 {% block js %}
+<script type="text/javascript">
 
     function block_new() {
-        return ``;
+        return `
+        <div class="feed-block_index">
+            <div class="feed-block-img" style="background-image: url('https://i1.sndcdn.com/artworks-000334356087-q9qfcp-t500x500.jpg')"></div>
+            <div class="feed-block-title">
+                <div class="feed-block-title-hidden"></div>
+                <div class="feed-block-title-text">
+                    Title podcast Title podcast Title podcast Title podcast
+                </div>
+            </div>
+        </div>
+        `;
     }
 
     function block_index() {
-        return ``;
+        return `
+            <div class="feed-block_index">
+                <div class="feed-block-img" style="background-image: url('https://i1.sndcdn.com/artworks-000334356087-q9qfcp-t500x500.jpg')"></div>
+                <div class="feed-block-title">
+                    <div class="feed-block-title-hidden"></div>
+                    <div class="feed-block-title-text">
+                        Title podcast Title podcast Title podcast Title podcast
+                    </div>
+                </div>
+                <div class="feed-block-leaving-menu">
+
+                    <div class="feed-block-leaving-menu-item apple-logo">
+
+                    </div>
+                    <div class="feed-block-leaving-menu-item google-logo">
+
+                    </div>
+                    <div class="feed-block-leaving-menu-item spotify-logo">
+
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     function drow_feed_new() {
-        for (var i = 0; i < .length; i++) {
-            [i]
+        block = $('.new_')[0];
+        for (var i = 0; i < 10; i++) {
+            block.innerHTML += `${block_new()}`;
         }
     }
 
     function drow_feed_index() {
-        f
+        block = $('.index_')[0];
+        for (var i = 0; i < 10; i++) {
+            block.innerHTML += `${block_index()}`;
+        }
     }
 
-    function (){
-
-    }
+    drow_feed_new();
+    drow_feed_index();
+</script>
 
 {% endblock js %}

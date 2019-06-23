@@ -30,7 +30,10 @@
                             {{ object.author }}
                         </div>
                         <div id="rss">
-                            RSS
+                            <div class="rss-btn">
+                                <div class="rss-icon"></div>
+                                RSS
+                            </div>
                         </div>
                         <div class="podcast_block_name">
                             {{ object.title }}
@@ -77,7 +80,7 @@
 
             <div class="window_rss display_none">
                 <div class="window_remove_hidden"></div>
-                <div class="window_remove_content">
+                <div class="window_remove_content-rss">
                     <div class="window_field-row">
                         <div class="window_title">
                             Podcast was created successfully!
@@ -110,6 +113,30 @@
                             <div class="spotify-logo"></div>
                         </a>
                     </div>
+                    <div class="">
+                        If you added a podcast to one of these services, please insert a link to it in the appropriate fields:
+                    </div>
+                    <div class="window_group_inputs">
+                        <div class="window_group_inputs-block">
+                            <div class="window_input-title">
+                                Apple podcast
+                            </div>
+                            <input class="window_input-field" type="text" name="Apple podcast link" value="LINK">
+                        </div>
+                        <div class="window_group_inputs-block">
+                            <div class="window_input-title">
+                                Google podcast
+                            </div>
+                            <input class="window_input-field" type="text" name="Google podcast link" value="LINK">
+                        </div>
+                        <div class="window_group_inputs-block">
+                            <div class="window_input-title">
+                                Spotify
+                            </div>
+                            <input class="window_input-field" type="text" name="Spotify link" value="LINK">
+                        </div>
+                    </div>
+                    <input class="btn_add_links" type="button" name="add episode" value="Apply">
                 </div>
             </div>
         </div>
@@ -122,10 +149,7 @@
                 function drowEpisodEdit(item) {
                     return `
                         <div class="episode_content">
-                            <div class="episode_content_title">
                                 <input class="input-title" type="text" name="title" />
-                                <div class="episode_content_liner"></div>
-                            </div>
                             <textarea class="input-description" name="episod_more" rows="10" cols="80" value="">
                                 Some brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief informationSome brief information
                             </textarea>
@@ -180,13 +204,12 @@
                         }
                     });
 
-
+                    let index_dell;
                     $('.btn-delete').on('click', function(event) {
                         event.preventDefault();
                         $('.window_remove').toggleClass('display_none');
                         $('.window_remove').toggleClass('display_block');
-
-                        btn_delete();
+                        index = $('.btn-delete').index(this);
                     });
 
                     $("#rss").on('click', function(event) {
@@ -219,7 +242,10 @@
                     $('.window_remove_button_apply').on('click', function(event) {
                         event.preventDefault();
                         //удалить подкаст из списка
-                        location.reload();
+                        block = $('.podcast_episode')[index];
+                        block.style.display = 'none';
+                        $('.window_remove').toggleClass('display_none');
+                        $('.window_remove').toggleClass('display_block');
                     });
 
 
@@ -228,60 +254,13 @@
                         $('.window_remove').toggleClass('display_none');
                         $('.window_remove').toggleClass('display_block');
                     });
-                }
 
-                function btn_delete() {
-                }
-
-
-                function successfully_created() {
-                    let content = document.getElementById("content");
-                    console.log(content);
-                    content.innerHTML = `
-                        <div class="window_remove">
-                            <div class="window_remove_hidden"></div>
-                            <div class="window_remove_content">
-                                <div class="window_field">
-                                    <div class="window_title">
-                                        Podcast was created successfully!
-                                    </div>
-                                    <div class="btn_close">X</div>
-                                </div>
-                                <div class="window_field">
-                                    <div class="">
-                                        To index a podcast, first you must add an episode to the podcast:
-                                    </div>
-                                    <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
-                                </div>
-                                <div class="window_field">
-                                    <div class="">
-                                        This is your link to the RSS podcast:
-                                    </div>
-                                    <input class="rss_link" type="text" name="RSS link" value="LINK" readonly>
-                                </div>
-                                <div class="">
-                                    You can add your podcast to these services:
-                                </div>
-                                <div class="window_group_buttons">
-                                    <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
-                                        <div class="apple-logo"></div>
-                                    </a>
-                                    <a class="btn-link" href="" target="_blank">
-                                        <div class="google-logo"></div>
-                                    </a>
-                                    <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
-                                        <div class="spotify-logo"></div>
-                                    </a>
-                                </div>
-                                <div class="">
-                                    You can find these instructions on the podcast edit page.
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                function whait_click_window() {
+                    $('.btn_add_links').on('click', function(event) {
+                        event.preventDefault();
+                        let input_google_link = $('.window_input-field')[0].value;
+                        let input_apple_link = $('.window_input-field')[1].value;
+                        let input_spotify_link = $('.window_input-field')[2].value;
+                    });
                 }
 
                 play_episod();

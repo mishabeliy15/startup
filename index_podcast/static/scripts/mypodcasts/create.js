@@ -53,6 +53,7 @@ function drawAddInputs(item) {
             <div class="input-title"> ${item} :</div>
             <input id="input-${item}" type="text" class="input-text" required></input>
         </div>
+        <div class="error error_${item}"></div>
     `;
 }
 
@@ -88,7 +89,7 @@ function readURL(input) {
 }
 
 function addPodcast() {
-    input_titles = ["Title", "Author"];
+    input_titles = ["title", "author"];
     content = $(".content");
     content = document.getElementById("content");
     content.innerHTML = `
@@ -104,7 +105,8 @@ function addPodcast() {
                                 <input name="image" id="input-img" class="input-img-hidden" type="file" name="photo" accept="image/*" alt="success" required/>
                             </div>
                         </div>
-                        <div class="input-subtitle">select file less than 1 megabyte</div>
+                        <div class="error error_image"></div>
+                        <div class="input-subtitle">select file less than 1 megabyte. recommend min size 1400x1400</div>
                         <img class="input-block" style="display: none" id="img-preview" alt="Your cover" width="200px" height="200px" />
                     </div>
                 </form>`;
@@ -125,6 +127,7 @@ function addPodcast() {
         </div>
         <div class="input-title">Description :</div>
         <textarea id="input-description" rows="8" cols="80" class="input-description" required></textarea>
+        <div class="error error_description"></div>
         <div id="input-answ"></div>
         <div class="input-block">
             <div class="input-title">Explicit :</div>
@@ -169,7 +172,7 @@ function addPodcast() {
 }
 
 function submitForm() {
-    input_ = ["input-img", "input-Title", "input-Author", "input-description"];
+    input_ = ["input-img", "input-title", "input-author", "input-description"];
     input_v = [];
     true_v = [];
     for (let i = 0; i < input_.length; i++) {
@@ -184,9 +187,9 @@ function submitForm() {
 
     if (true_v[0] && true_v[1] && true_v[2] && true_v[3]) {
         sendAddPodcast({
-            title: $("#input-Title")[0].value,
+            title: $("#input-title")[0].value,
             image: $("#input-img")[0].files[0],
-            author: $("#input-Author")[0].value,
+            author: $("#input-author")[0].value,
             description: $("#input-description")[0].value,
             language: languages[$("#input-Language")[0].value],
             category: genres[$("#input-Genre")[0].value],
@@ -265,6 +268,10 @@ function sendAddPodcast(item) {
         },
         error: response => {
             console.log(response);
+            for (let i in response.responseJSON){
+                 for (let j = 0;j < response.responseJSON[i].length;j++)
+                      $('.error_' + i)[0].innerHTML += response.responseJSON[i][j];
+            }
         }
     });
 }

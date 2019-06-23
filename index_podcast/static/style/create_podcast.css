@@ -421,3 +421,13 @@ select {
 .spotify-logo {
     background-image: url('../image/spotify-podcast-logo.jpg');
 }
+
+#explicit {
+    width: 25px;
+    height: 25px;
+}
+
+.error {
+    color: red;
+    font-style: 1.5rem;
+}

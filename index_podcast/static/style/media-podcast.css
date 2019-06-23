@@ -8,9 +8,33 @@
     }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 950px) {
     html {
         font-size: 8px;
+    }
+    .window_group_inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .window_group_inputs-block {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .window_input-field {
+        width: 50%;
+    }
+    .episode_header_img_and_btn {
+        min-width: 150px;
+        max-width: 150px;
+    }
+
+    .episode_header {
+        align-items: center;
+    }
+    .episode_content_description_btn {
+        width: 80%;
     }
 }
 
@@ -41,14 +65,20 @@
     }
 
     .episode_action_btn div {
-        width: 100%;
-        height: 100px;
+        width: 60px;
+        height: 60px;
     }
 
     .episode_content_description_btn {
-        height: 100px;
+        width: 100px;
     }
 
+    .episode_header {
+        align-items: center;
+    }
+    .episode_content {
+        width: 600px
+    }
 
     /*  */
     .window_title {
@@ -81,5 +111,42 @@
     .rss_link {
         border: 1px solid black;
         width: 90%;
+    }
+
+    .window_group_inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .window_group_inputs-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .window_input-field {
+        width: 100%;
+    }
+
+    .window_remove_content-rss {
+        top: 10%; bottom: 10%;
+    }
+    .episode_content_title {
+        height: 300px;
+    }
+    .episode_content_description_btn {
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    html {
+        font-size: 8px;
+    }
+
+    .episode_content {
+        width: 300px
+    }
+    .episode_header {
+        align-items: center;
     }
 }

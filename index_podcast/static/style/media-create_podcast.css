@@ -7,6 +7,17 @@
         height: 100px;
     }
 
+
+    #explicit {
+        width: 60px;
+        height: 60px;
+    }
+
+    select {
+        font-size: 1.5rem;
+        height: 75px;
+    }
+
     .header-center {
         margin: 0 5px 0 5px;
         flex-grow: 2;

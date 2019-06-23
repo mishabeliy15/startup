@@ -22,7 +22,10 @@
                     {{ object.title }}
                 </div>
                 <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}">
-                    RSS
+                    <div class="rss-btn">
+                        <div class="rss-icon"></div>
+                        RSS
+                    </div>
                 </a>
                 <div class="podcast-description">
                     {{ object.description }}

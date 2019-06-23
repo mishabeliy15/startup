@@ -279,3 +279,103 @@ svg {
     height: 110px;
     width: 110px;
 }
+
+.feed-title {
+    font-size: 2.5rem;
+}
+
+.feed {
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 210px;
+    justify-content: center;
+}
+
+.feed-block_index {
+    border-radius: 10px;
+    position: relative;
+    min-height: 200px;
+    min-width: 200px;
+    max-height: 200px;
+    max-width: 200px;
+    background-color: #e5e5e5;
+    margin: 5px;
+    -webkit-box-shadow: 2px 2px 6px -3px black;
+    -moz-box-shadow: 2px 2px 6px -3px black;
+    box-shadow: 2px 2px 6px -3px black;
+}
+
+.feed-block-img {
+    border-radius: 10px;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.feed-block-title {
+    position: absolute;
+    bottom: 5px; left: 5px; right: 5px;
+    height: 50px;
+    padding: 5px;
+}
+
+.feed-block-title-hidden {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: white;
+    opacity: 0.7;
+}
+
+.feed-block-title-text {
+    overflow: hidden;
+    position: absolute;
+    color: black;
+    top: 0; right: 0; bottom: 0; left: 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.feed-block-leaving-menu {
+    border-radius: 10px;
+    position: absolute;
+    bottom: 5px; right: 5px; top: 5px;
+    width: 50px;
+    transition: 0.2s;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+
+.feed-block_index:hover .feed-block-leaving-menu {
+    display: flex;
+}
+
+.feed-block-leaving-menu-item {
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.apple-logo {
+    background-image: url('../image/apple-podcast-logo.jpg');
+}
+
+.google-logo {
+    background-image: url('../image/google-podcast-logo.png');
+}
+
+.spotify-logo {
+    background-image: url('../image/spotify-podcast-logo.jpg');
+}

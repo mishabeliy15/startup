@@ -141,7 +141,7 @@ body, .blur-blur::before {
     background-color: #e5e5e5;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     -webkit-box-shadow: 5px 5px 10px black;
     -moz-box-shadow: 5px 5px 10px black;
     box-shadow: 5px 5px 10px black;
@@ -189,7 +189,7 @@ body, .blur-blur::before {
 
 .episode_content {
     flex-grow: 4;
-    width: 100%;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -427,9 +427,9 @@ body, .blur-blur::before {
 
 .window_remove_content-rss {
     z-index: 7;
-    top: 25%;
+    top: 20%;
     right: 10%;
-    bottom: 25%;
+    bottom: 20%;
     left: 10%;
     position: absolute;
     background-color: white;
@@ -439,7 +439,7 @@ body, .blur-blur::before {
     flex-direction: column;
     text-align: center;
     justify-content: space-around;
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .window_field {
@@ -481,6 +481,23 @@ body, .blur-blur::before {
 }
 
 .btn_add_episods:hover{
+    background-color: #bcffb2;
+}
+
+.btn_add_links{
+    background-color: #d2ffcc;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    color: black;
+    border: none;
+}
+
+.btn_add_links:active {
+    background-color: #e8ffe5;
+}
+
+.btn_add_links:hover{
     background-color: #bcffb2;
 }
 
@@ -532,4 +549,33 @@ body, .blur-blur::before {
 
 .spotify-logo {
     background-image: url('../image/spotify-podcast-logo.jpg');
+}
+
+.rss-btn{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.rss-icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../image/RSS-logo.png');
+    height: 50px;
+    width: 50px;
+}
+
+.window_group_inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.window_group_inputs-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
