@@ -24,15 +24,15 @@
                     </a>
                     <div class="feed-block-leaving-menu">
                         {% if podcast.link_apple %}
-                            <a href="{{ podcast.link_apple }}" class="feed-block-leaving-menu-item apple-logo">
+                            <a target="_blank" href="{{ podcast.link_apple }}" class="feed-block-leaving-menu-item apple-logo">
                             </a>
                         {% endif %}
                         {% if podcast.link_google %}
-                            <a href="{{ podcast.link_google }}" class="feed-block-leaving-menu-item google-logo">
+                            <a target="_blank" href="{{ podcast.link_google }}" class="feed-block-leaving-menu-item google-logo">
                             </a>
                         {% endif %}
                         {% if  podcast.link_spotify %}
-                            <a href="{{ podcast.link_spotify }}" class="feed-block-leaving-menu-item spotify-logo">
+                            <a target="_blank" href="{{ podcast.link_spotify }}" class="feed-block-leaving-menu-item spotify-logo">
                             </a>
                         {% endif %}
                     </div>
