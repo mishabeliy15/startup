@@ -546,3 +546,19 @@ select {
 .btn-delete:active {
     background-color: #ffb2b2;
 }
+
+.input-name-btn {
+    transition: 0.2s;
+    outline: none;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: 0;
+    font-size: 50%;
+    flex-grow: 1;
+    height: 80%;
+    background-image: url('../image/search-icon.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25%;
+    width: 60px;
+}

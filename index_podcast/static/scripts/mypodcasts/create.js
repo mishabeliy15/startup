@@ -2,7 +2,7 @@ function restorePodcastHeader() {
     $("#content")[0].innerHTML = ` <header>
         <div class="header-center">
             <input id="search-request" class="input-name" type="text" name="search podcasts" value="" maxlength="25" placeholder="Search">
-            <input class="input-name-btn" type="button" name="button search" value="&#128269;">
+            <input class="input-name-btn" type="button" name="button search" value="">
         </div>
         <div class="header-right">
             <input class="add-podcast-btn" type="button" name="button search" value="Сreate a new podcast">

@@ -59,4 +59,13 @@
         height: 80px;
         width: 80px;
     }
+
+    .input-name-btn {
+        width: 60px;
+        background-size: 60%;
+    }
+
+    #selected-score::after {
+        content: '';
+    }
 }
