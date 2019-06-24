@@ -35,9 +35,9 @@ function DateToDateAgo(s) {
 }
 
 //  video block
-function videoToBlock(item) {
+function videoToBlock(item, style='') {
     return `
-                        <div class="video-block">
+                        <div name="episode" class="video-block" style="${style}">
                             <div class="video-img-block">
                                 <div style="background-image: url('${item.snippet.thumbnails.high.url}')" class="video-img"></div>
                                 <div class="video-time">
@@ -65,7 +65,7 @@ function videoToBlock(item) {
 // podcast block
 function drawEpisod(item) {
     return `
-                    <div class="podcast-text">
+                    <div name="episode" class="podcast-text">
                         <div class="podcast-block-header">
                             <div class="podcast-text-title">
                                 ${item.snippet.title}
@@ -112,9 +112,20 @@ function editEpisode(item) {
                 `;
 }
 
+function check_search(videos=dateList.items) {
+    let find = new RegExp($("#search-request")[0].value, "i");
+    for (let i = 0; i < videos.length; i++) {
+        if (find.test(videos[i].snippet.title) && time_ToSeconds(videos[i].contentDetails.duration) > 0)
+            $('div[name="episode"]')[i].style.display = 'block';
+        else
+            $('div[name="episode"]')[i].style.display = 'none';
+    }
+}
 
-function drawVideoBlocks(videos) {
+function drawVideoBlocks(videos=dateList.items) {
     let list = document.getElementById("video-list");
+    list.innerHTML = '';
+    let find = new RegExp($("#search-request")[0].value, "i");
     for (let i = 0; i < videos.length; i++) {
         if (time_ToSeconds(videos[i].contentDetails.duration) > 0)
             list.innerHTML += videoToBlock(videos[i]);
@@ -204,16 +215,16 @@ function clickOnVideo(event, videos) {
 function editActive() {
     $(".btn_edit").on('click', function (event) {
         event.preventDefault();
-        episodId = $('.btn_edit').index(this);
-        episodBlockId = $('.podcast-block')[episodId];
+        let episodId = $('.btn_edit').index(this);
+        let episodBlockId = $('.podcast-block')[episodId];
         episodBlockId.innerHTML = editEpisode(innerChooseVideo[episodId]);
 
         $(".btn_edit_apply").on('click', function (event) {
             event.preventDefault();
-            index = $('.btn_edit_apply').index(this);
-            titleInfo = $('.episod-title')[index].value;
-            moreInfo = $('.episod-more')[index].value;
-            id = $('.btn_edit').index(this);
+            let index = $('.btn_edit_apply').index(this);
+            let titleInfo = $('.episod-title')[index].value;
+            let moreInfo = $('.episod-more')[index].value;
+            let id = $('.btn_edit').index(this);
             innerChooseVideo[id].snippet.title = titleInfo;
             innerChooseVideo[id].snippet.description = moreInfo;
             $('.podcast-block')[id].innerHTML = drawEpisod(innerChooseVideo[id]);
@@ -222,7 +233,7 @@ function editActive() {
 
         $(".btn-edit-false").on('click', function (event) {
             event.preventDefault();
-            id = $('.btn_del').index(this);
+            let id = $('.btn_del').index(this);
             $('.podcast-block')[id].innerHTML = drawEpisod(innerChooseVideo[id]);
             editActive();
         });
@@ -230,8 +241,8 @@ function editActive() {
 
     $(".btn_del").on('click', function (event) {
         event.preventDefault();
-        episodId = $('.btn_del').index(this);
-        episodBlockId = $('.podcast-block')[episodId];
+        let episodId = $('.btn_del').index(this);
+        let episodBlockId = $('.podcast-block')[episodId];
         $('.podcast-block')[episodId].remove();
         innerChooseVideo.splice(episodId, 1);
     });
@@ -296,6 +307,7 @@ $(document).ready(() => {
             console.log(data);
             dateList = data;
             drawBlocksWithEvents();
+            $("#search-request").bind("input", () => check_search());
         }
     });
     fetch("/mypodcasts/api/podcasts/")
