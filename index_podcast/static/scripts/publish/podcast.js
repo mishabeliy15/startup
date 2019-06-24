@@ -16,12 +16,14 @@ $(loadPodcast);
 
 $('.btn-paly').on('click', function (event) {
     event.preventDefault();
-    $(this).toggleClass('icon-play');
-    $(this).toggleClass('icon-pause');
     if (+this.id !== play_index) {
-        play_index = +this.id;
         console.log(`play: ${play_index}`);
         audio.pause();
+        if (!episodes[+this.id].audio_file) {
+            close_window_alert();
+            return;
+        }
+        play_index = +this.id;
         audio.src = '/media/' + episodes[play_index].audio_file;
         audio.play();
     } else if (audio.paused) {
@@ -31,4 +33,11 @@ $('.btn-paly').on('click', function (event) {
         console.log(`pause: ${play_index}`);
         audio.pause();
     }
+    $(this).toggleClass('icon-play');
+    $(this).toggleClass('icon-pause');
 });
+
+function close_window_alert() {
+    $('.window_remove').toggleClass('display_none');
+    $('.window_remove').toggleClass('display_block');
+}
