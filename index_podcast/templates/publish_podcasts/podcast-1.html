@@ -1,5 +1,6 @@
 {% load static %}
 {% get_media_prefix as MEDIA_PREFIX %}
+{% load extra_filters %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -54,7 +55,7 @@
                             </div>
                         </div>
                         <div class="episode_header_time">
-                            {{ episode.duration }}
+                            {{ episode.duration|dur_to_str }}
                         </div>
                     </div>
                     <div class="episode_content">
