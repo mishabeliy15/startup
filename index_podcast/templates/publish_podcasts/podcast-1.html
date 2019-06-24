@@ -30,12 +30,18 @@
 
                             </div>
                             <div class="feed-block-leaving-menu-item-group">
-                                <div class="feed-block-leaving-menu-item apple-logo">
-                                </div>
-                                <div class="feed-block-leaving-menu-item google-logo">
-                                </div>
-                                <div class="feed-block-leaving-menu-item spotify-logo">
-                                </div>
+                                {% if object.link_apple %}
+                                <a href="{{ object.link_apple }}" target="_blank" class="feed-block-leaving-menu-item apple-logo">
+                                </a>
+                                {% endif %}
+                                {% if object.link_google %}
+                                <a href="{{ object.link_google }}" target="_blank" class="feed-block-leaving-menu-item google-logo">
+                                </a>
+                                {% endif %}
+                                {% if object.link_spotify %}
+                                <a href="{{ object.link_spotify }}" target="_blank" class="feed-block-leaving-menu-item spotify-logo">
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -242,7 +242,7 @@ function successfully_created(response) {
                     <div class="">
                         To index a podcast, first you must add an episode to the podcast:
                     </div>
-                    <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
+                    <input class="btn_add_episods" type="button" name="add episode" value="Add episodes!">
                 </div>
                 <div class="window_field">
                     <div class="">

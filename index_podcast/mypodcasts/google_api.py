@@ -26,7 +26,7 @@ def get_more_info_videos(video_ids, part=('snippet', 'statistics', 'contentDetai
     return requests.get(api_url, params=data).json()
 
 
-def get_all_info_videos_of_channel(channelid, maxRes=50, **kwargs):
+def get_all_info_videos_of_channel(channelid, maxRes=15, **kwargs):
     videos = get_all_video_of_channel(channelid, maxRes)
     ids = [i['id']['videoId'] for i in videos['items']]
     return get_more_info_videos(ids)

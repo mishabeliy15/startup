@@ -98,8 +98,8 @@
                 <div class="">
                     This is your link to the RSS podcast:
                 </div>
-                <input class="rss_link" type="text" name="RSS link" value="https://
-                        {{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"
+                <input class="rss_link" type="text" name="RSS link"
+                       value="https://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"
                        readonly>
             </div>
             <div class="">
