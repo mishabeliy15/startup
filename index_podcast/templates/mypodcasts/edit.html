@@ -2,154 +2,159 @@
 {% get_media_prefix as MEDIA_PREFIX %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>{{ object.title }}</title>
-        <link rel="stylesheet" href="{% static 'style/null.css' %}">
-        <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
-        <link rel="stylesheet" href="{% static 'style/media-podcast.css' %}">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
-        <script type="text/javascript">
-            const CRSF_TOKEN = "{{ csrf_token }}";
-            const USER_ID = {{ object.owner.id }};
-            const PODCAST_ID = {{ object.id }};
-        </script>
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ object.title }}</title>
+    <link rel="stylesheet" href="{% static 'style/null.css' %}">
+    <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
+    <link rel="stylesheet" href="{% static 'style/media-podcast.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
+          rel="stylesheet">
+    <script type="text/javascript">
+        const CRSF_TOKEN = "{{ csrf_token }}";
+        const USER_ID = {{ object.owner.id }};
+        const PODCAST_ID = {{ object.id }};
+    </script>
+</head>
 
-    <body>
-        <div class="blur-block-header">
-            <div class="blur-blur"></div>
-            <div class="blur-transparency white"></div>
-            <div class="blur-conteiner podcast_header">
-                <div class="podcast_block">
-                    <div class="podcast_block_img">
-                        <img class="podcast_block_img-img" src="{{ MEDIA_PREFIX }}{{ object.image }}" alt="podcast image">
+<body>
+<div class="blur-block-header">
+    <div class="blur-blur"></div>
+    <div class="blur-transparency white"></div>
+    <div class="blur-conteiner podcast_header">
+        <div class="podcast_block">
+            <div class="podcast_block_img">
+                <img class="podcast_block_img-img" src="{{ MEDIA_PREFIX }}{{ object.image }}" alt="podcast image">
+            </div>
+            <div class="podcast_block_info">
+                <div class="podcast_block_authot">
+                    {{ object.author }}
+                </div>
+                <div id="rss">
+                    <div class="rss-btn">
+                        <div class="rss-icon"></div>
+                        RSS
                     </div>
-                    <div class="podcast_block_info">
-                        <div class="podcast_block_authot">
-                            {{ object.author }}
-                        </div>
-                        <div id="rss">
-                            <div class="rss-btn">
-                                <div class="rss-icon"></div>
-                                RSS
-                            </div>
-                        </div>
-                        <div class="podcast_block_name">
-                            {{ object.title }}
-                        </div>
-                        <div class="podcast_block_episods">
-                            {{ object.episodes.count }}
-                        </div>
-                    </div>
+                </div>
+                <div class="podcast_block_name">
+                    {{ object.title }}
+                </div>
+                <div class="podcast_block_episods">
+                    {{ object.episodes.count }}
                 </div>
             </div>
         </div>
-        <div class="blur-block-content">
-            <div class="blur-blur blur-blur-content"></div>
-            <div class="blur-transparency black"></div>
-            <div class="blur-conteiner content" id="content">
+    </div>
+</div>
+<div class="blur-block-content">
+    <div class="blur-blur blur-blur-content"></div>
+    <div class="blur-transparency black"></div>
+    <div class="blur-conteiner content" id="content">
+    </div>
+
+    <footer>
+        <address class="footer-text">
+            © 2019 Video2Cast.com
+            <nav>
+                <a href="{% url 'privacy_policy' %}">Privacy policy</a>
+            </nav>
+        </address>
+    </footer>
+
+
+    <div class="window_remove display_none">
+        <div class="window_remove_hidden-rss"></div>
+        <div class="window_remove_content-rss">
+            <div class="window_remove_text">
+                Do you really want to delete this episode? This action cannot be undone!
             </div>
-
-            <footer>
-                <address class="footer-text">
-                    © 2019 Video2Cast.com
-                    <nav>
-                        <a href="{% url 'privacy_policy' %}">Privacy policy</a>
-                    </nav>
-                </address>
-            </footer>
-
-
-            <div class="window_remove display_none">
-                <div class="window_remove_hidden-rss"></div>
-                <div class="window_remove_content-rss">
-                    <div class="window_remove_text">
-                        Do you really want to delete this episode? This action cannot be undone!
-                    </div>
-                    <div class="window_remove_group_button">
-                        <div class="window_remove_button_apply">
-                            Delete
-                        </div>
-                        <div class="window_remove_button_cancel">
-                            Cancel
-                        </div>
-                    </div>
+            <div class="window_remove_group_button">
+                <div class="window_remove_button_apply">
+                    Delete
                 </div>
-            </div>
-
-            <div class="window_rss display_none">
-                <div class="window_remove_hidden"></div>
-                <div class="window_remove_content-rss">
-                    <div class="window_field-row">
-                        <div class="window_title">
-                            Podcast was created successfully!
-                        </div>
-                        <div class="btn_close">X</div>
-                    </div>
-                    <div class="window_field">
-                        <div class="">
-                            To index a podcast, first you must add an episode to the podcast:
-                        </div>
-                        <input class="btn_add_episods" type="button" name="add episode" value="Add episods!">
-                    </div>
-                    <div class="window_field">
-                        <div class="">
-                            This is your link to the RSS podcast:
-                        </div>
-                        <input class="rss_link" type="text" name="RSS link" value="https://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}" readonly>
-                    </div>
-                    <div class="">
-                        You can add your podcast to these services:
-                    </div>
-                    <div class="window_group_buttons">
-                        <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
-                            <div class="apple-logo"></div>
-                        </a>
-                        <a class="btn-link" href="https://search.google.com/devtools/podcast/preview" target="_blank">
-                            <div class="google-logo"></div>
-                        </a>
-                        <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
-                            <div class="spotify-logo"></div>
-                        </a>
-                    </div>
-                    <div class="">
-                        If you added a podcast to one of these services, please insert a link to it in the appropriate fields:
-                    </div>
-                    <div class="window_group_inputs">
-                        <div class="window_group_inputs-block">
-                            <div class="window_input-title">
-                                Apple podcast
-                            </div>
-                            <input class="window_input-field" type="text" name="Apple podcast link" value="LINK">
-                        </div>
-                        <div class="window_group_inputs-block">
-                            <div class="window_input-title">
-                                Google podcast
-                            </div>
-                            <input class="window_input-field" type="text" name="Google podcast link" value="LINK">
-                        </div>
-                        <div class="window_group_inputs-block">
-                            <div class="window_input-title">
-                                Spotify
-                            </div>
-                            <input class="window_input-field" type="text" name="Spotify link" value="LINK">
-                        </div>
-                    </div>
-                    <input class="btn_add_links" type="button" name="add episode" value="Apply">
+                <div class="window_remove_button_cancel">
+                    Cancel
                 </div>
             </div>
         </div>
+    </div>
 
-            <!-- подключаем все скрипты -->
-            <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
-            <script src="{% static 'scripts/main.js' %}"></script>
-            <script type="text/javascript" src="{% static 'scripts/mypodcasts/apis.js' %}"></script>
-            <script type="text/javascript">
-                let podcast = null;
+    <div class="window_rss display_none">
+        <div class="window_remove_hidden"></div>
+        <div class="window_remove_content-rss">
+            <div class="window_field-row">
+                <div class="window_title">
+                    Podcast was created successfully!
+                </div>
+                <div class="btn_close">X</div>
+            </div>
+            <div class="window_field">
+                <div class="">
+                    To index a podcast, first you must add an episode to the podcast:
+                </div>
+                <input class="btn_add_episods" type="button" name="add episode" value="Add episodes!">
+            </div>
+            <div class="window_field">
+                <div class="">
+                    This is your link to the RSS podcast:
+                </div>
+                <input class="rss_link" type="text" name="RSS link" value="https://
+                        {{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}"
+                       readonly>
+            </div>
+            <div class="">
+                You can add your podcast to these services:
+            </div>
+            <div class="window_group_buttons">
+                <a class="btn-link" href="https://podcastsconnect.apple.com/my-podcasts" target="_blank">
+                    <div class="apple-logo"></div>
+                </a>
+                <a class="btn-link" href="https://search.google.com/devtools/podcast/preview" target="_blank">
+                    <div class="google-logo"></div>
+                </a>
+                <a class="btn-link" href="https://podcasters.spotify.com/submit" target="_blank">
+                    <div class="spotify-logo"></div>
+                </a>
+            </div>
+            <div class="">
+                If you added a podcast to one of these services, please insert a link to it in the appropriate fields:
+            </div>
+            <div class="window_group_inputs">
+                <div class="window_group_inputs-block">
+                    <div class="window_input-title">
+                        Apple podcast
+                    </div>
+                    <input class="window_input-field" type="text" name="Apple podcast link"
+                           value="{{ object.link_apple }}">
+                </div>
+                <div class="window_group_inputs-block">
+                    <div class="window_input-title">
+                        Google podcast
+                    </div>
+                    <input class="window_input-field" type="text" name="Google podcast link"
+                           value="{{ object.link_google }}">
+                </div>
+                <div class="window_group_inputs-block">
+                    <div class="window_input-title">
+                        Spotify
+                    </div>
+                    <input class="window_input-field" type="text" name="Spotify link" value="{{ object.link_spotify }}">
+                </div>
+            </div>
+            <input class="btn_add_links" type="button" name="add episode" value="Apply">
+        </div>
+    </div>
+</div>
 
-                function drowEpisodEdit(item) {
-                    return `
+<!-- подключаем все скрипты -->
+<script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'scripts/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'scripts/mypodcasts/apis.js' %}"></script>
+<script type="text/javascript">
+    let podcast = null;
+
+    function drowEpisodEdit(item) {
+        return `
                         <div class="episode_content">
                             <input class="input-title" value="${item.title}" type="text" name="title"/>
                             <textarea class="input-description" name="episod_more" rows="10" cols="80" value="">
@@ -168,115 +173,123 @@
                             </div>
                         </div>
                     `;
-                }
+    }
 
-                function play_episod(items=podcast) {
-                    let contain = document.getElementById("content");
-                    contain.innerHTML = ``;
-                    for (let i = 0; i < items.episodes.length; i++) {
-                        contain.innerHTML += `
+    function play_episod(items = podcast) {
+        let contain = document.getElementById("content");
+        contain.innerHTML = ``;
+        for (let i = 0; i < items.episodes.length; i++) {
+            contain.innerHTML += `
                             <div class="podcast_episode">
                                 ${drowEpisodEdit(items.episodes[i])}
                             </div>
                         `;
-                    }
-                }
+        }
+    }
 
-                function btn_edit() {
-                    $('.btn-cancel').on('click', function(event) {
-                        event.preventDefault();
-                        let index = $('.btn-cancel').index(this);
-                        console.log(index);
-                        let episode_block = $('.podcast_episode');
-                        episode_block[index].innerHTML = `${drowEpisodEdit(podcast.episodes[index])}`;
-                    });
-
-
-                    $('.btn-confirm').on('click', function(event) {
-                        event.preventDefault();
-                        let index = $('.btn-confirm').index(this);
-                        let description = $('.input-description')[index].value;
-                        let title = $('.input-title')[index].value;
-                        if (description != '' && title != '') {
-                            console.log(title, ' ', description);
-                            podcast.episodes[index].title = title;
-                            podcast.episodes[index].description = description;
-                            PatchEpisode(podcast.episodes[index].id,{
-                                'title':title,
-                                'description':description
-                            });
-                        } else {
-
-                        }
-                    });
+    function btn_edit() {
+        $('.btn-cancel').on('click', function (event) {
+            event.preventDefault();
+            let index = $('.btn-cancel').index(this);
+            console.log(index);
+            let episode_block = $('.podcast_episode');
+            episode_block[index].innerHTML = `${drowEpisodEdit(podcast.episodes[index])}`;
+        });
 
 
-                    let id_del = null;
-
-                    $('.btn-delete').on('click', function(event) {
-                        event.preventDefault();
-                        $('.window_remove').toggleClass('display_none');
-                        $('.window_remove').toggleClass('display_block');
-                        id_del = $('.btn-delete').index(this);
-                        console.log(id_del);
-                    });
-
-                    $("#rss").on('click', function(event) {
-                        event.preventDefault();
-                        $('.window_rss').toggleClass('display_none');
-                        $('.window_rss').toggleClass('display_block');
-                    });
-
-
-                    $('.rss_link').on('click', function(event) {
-                        event.preventDefault();
-                        let rss_link = $('.rss_link')[0];
-                        rss_link.select();
-                        document.execCommand("copy");
-                    });
-                    $('.btn_close').on('click', function(event) {
-                        event.preventDefault();
-                        $('.window_rss').toggleClass('display_none');
-                        $('.window_rss').toggleClass('display_block');
-                    });
-                    $('.btn_add_episods').on('click', function(event) {
-                        event.preventDefault();
-                        console.log(3);
-                        location.href = `/mypodcasts/add-episodes/?podcast=${podcast.id}`;
-                    });
-
-                    $('.window_remove_button_apply').on('click', function(event) {
-                        event.preventDefault();
-                        DeleteEpisode(podcast.episodes[id_del].id, () => {
-                            block = $('.podcast_episode')[id_del];
-                            block.style.display = 'none';
-                            $('.window_remove').toggleClass('display_none');
-                            $('.window_remove').toggleClass('display_block');
-                        });
-                    });
-
-
-                    $('.window_remove_button_cancel').on('click', function(event) {
-                        event.preventDefault();
-                        $('.window_remove').toggleClass('display_none');
-                        $('.window_remove').toggleClass('display_block');
-                    });
-
-
-                    $('.btn_add_links').on('click', function(event) {
-                        event.preventDefault();
-                        let input_google_link = $('.window_input-field')[0].value;
-                        let input_apple_link = $('.window_input-field')[1].value;
-                        let input_spotify_link = $('.window_input-field')[2].value;
-                    });
-                }
-
-                GetPodcast(PODCAST_ID, response => {
-                    podcast = response;
-                    play_episod();
-                    btn_edit();
+        $('.btn-confirm').on('click', function (event) {
+            event.preventDefault();
+            let index = $('.btn-confirm').index(this);
+            let description = $('.input-description')[index].value;
+            let title = $('.input-title')[index].value;
+            if (description != '' && title != '') {
+                console.log(title, ' ', description);
+                podcast.episodes[index].title = title;
+                podcast.episodes[index].description = description;
+                PatchEpisode(podcast.episodes[index].id, {
+                    'title': title,
+                    'description': description
                 });
-            </script>
-    </body>
+            } else {
+
+            }
+        });
+
+
+        let id_del = null;
+
+        $('.btn-delete').on('click', function (event) {
+            event.preventDefault();
+            $('.window_remove').toggleClass('display_none');
+            $('.window_remove').toggleClass('display_block');
+            id_del = $('.btn-delete').index(this);
+            console.log(id_del);
+        });
+
+        $("#rss").on('click', function (event) {
+            event.preventDefault();
+            $('.window_rss').toggleClass('display_none');
+            $('.window_rss').toggleClass('display_block');
+        });
+
+
+        $('.rss_link').on('click', function (event) {
+            event.preventDefault();
+            let rss_link = $('.rss_link')[0];
+            rss_link.select();
+            document.execCommand("copy");
+        });
+        $('.btn_close').on('click', function (event) {
+            event.preventDefault();
+            $('.window_rss').toggleClass('display_none');
+            $('.window_rss').toggleClass('display_block');
+        });
+        $('.btn_add_episods').on('click', function (event) {
+            event.preventDefault();
+            console.log(3);
+            location.href = `/mypodcasts/add-episodes/?podcast=${podcast.id}`;
+        });
+
+        $('.window_remove_button_apply').on('click', function (event) {
+            event.preventDefault();
+            DeleteEpisode(podcast.episodes[id_del].id, () => {
+                block = $('.podcast_episode')[id_del];
+                block.style.display = 'none';
+                $('.window_remove').toggleClass('display_none');
+                $('.window_remove').toggleClass('display_block');
+            });
+        });
+
+
+        $('.window_remove_button_cancel').on('click', function (event) {
+            event.preventDefault();
+            $('.window_remove').toggleClass('display_none');
+            $('.window_remove').toggleClass('display_block');
+        });
+
+
+        $('.btn_add_links').on('click', function (event) {
+            event.preventDefault();
+            let input_google_link = $('.window_input-field')[0].value;
+            let input_apple_link = $('.window_input-field')[1].value;
+            let input_spotify_link = $('.window_input-field')[2].value;
+            PatchPodcast(PODCAST_ID, {
+                link_spotify: input_spotify_link,
+                link_google: input_google_link,
+                link_apple: input_apple_link
+            }, () => {
+                $('.window_rss').toggleClass('display_none');
+                $('.window_rss').toggleClass('display_block');
+            });
+        });
+    }
+
+    GetPodcast(PODCAST_ID, response => {
+        podcast = response;
+        play_episod();
+        btn_edit();
+    });
+</script>
+</body>
 
 </html>

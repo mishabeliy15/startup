@@ -24,5 +24,8 @@
     </div>
 {% endblock content %}
 {% block js %}
+    <script type="text/javascript">
+    let podcast_selected = {% if podcast %}{{ podcast }}{% else %} null {% endif %};
+    </script>
     <script type="text/javascript" src="{% static 'scripts/mypodcasts/add_episodes.js' %}"></script>
 {% endblock js %}

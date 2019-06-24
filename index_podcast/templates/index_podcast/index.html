@@ -4,84 +4,62 @@
     <link rel="stylesheet" href="{% static 'style/media-main.css' %}">
 {% endblock head %}
 {% block content %}
-    {% if user.is_authenticated  %}
-        <div class="feed-box">
-            <div class="feed-title">
-                Index:
-            </div>
-            <div class="feed index_">
-
-            </div>
+    {% get_media_prefix as MEDIA_PREFIX %}
+    <div class="feed-box">
+        <div class="feed-title">
+            Indexed:
         </div>
-        <div class="feed-box">
-            <div class="feed-title">
-                New:
-            </div>
-            <div class="feed new_">
-
-            </div>
+        <div class="feed index_">
+            {% for podcast in last_indexes %}
+                <div class="feed-block_index">
+                    <a href="{% url 'publish_podcast:podcast-detail' podcast.owner.id podcast.id %}">
+                        <div class="feed-block-img"
+                             style="background-image: url('{{ MEDIA_PREFIX }}{{ podcast.image }}')"></div>
+                        <div class="feed-block-title">
+                            <div class="feed-block-title-hidden"></div>
+                            <div class="feed-block-title-text">
+                                {{ podcast.title }}
+                            </div>
+                        </div>
+                    </a>
+                    <div class="feed-block-leaving-menu">
+                        {% if podcast.link_apple %}
+                            <a target="_blank" href="{{ podcast.link_apple }}" class="feed-block-leaving-menu-item apple-logo">
+                            </a>
+                        {% endif %}
+                        {% if podcast.link_google %}
+                            <a target="_blank" href="{{ podcast.link_google }}" class="feed-block-leaving-menu-item google-logo">
+                            </a>
+                        {% endif %}
+                        {% if  podcast.link_spotify %}
+                            <a target="_blank" href="{{ podcast.link_spotify }}" class="feed-block-leaving-menu-item spotify-logo">
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endif %}
+    </div>
+    <div class="feed-box">
+        <div class="feed-title">
+            New:
+        </div>
+        <div class="feed new_">
+            {% for podcast in last_podcasts %}
+                <div class="feed-block_index">
+                    <a href="{% url 'publish_podcast:podcast-detail' podcast.owner.id podcast.id %}">
+                        <div class="feed-block-img"
+                             style="background-image: url('{{ MEDIA_PREFIX }}{{ podcast.image }}')"></div>
+
+                        <div class="feed-block-title">
+                            <div class="feed-block-title-hidden"></div>
+                            <div class="feed-block-title-text">
+                                {{ podcast.title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}
-{% block js %}
-<script type="text/javascript">
-
-    function block_new() {
-        return `
-        <div class="feed-block_index">
-            <div class="feed-block-img" style="background-image: url('https://i1.sndcdn.com/artworks-000334356087-q9qfcp-t500x500.jpg')"></div>
-            <div class="feed-block-title">
-                <div class="feed-block-title-hidden"></div>
-                <div class="feed-block-title-text">
-                    Title podcast Title podcast Title podcast Title podcast
-                </div>
-            </div>
-        </div>
-        `;
-    }
-
-    function block_index() {
-        return `
-            <div class="feed-block_index">
-                <div class="feed-block-img" style="background-image: url('https://i1.sndcdn.com/artworks-000334356087-q9qfcp-t500x500.jpg')"></div>
-                <div class="feed-block-title">
-                    <div class="feed-block-title-hidden"></div>
-                    <div class="feed-block-title-text">
-                        Title podcast Title podcast Title podcast Title podcast
-                    </div>
-                </div>
-                <div class="feed-block-leaving-menu">
-
-                    <div class="feed-block-leaving-menu-item apple-logo">
-
-                    </div>
-                    <div class="feed-block-leaving-menu-item google-logo">
-
-                    </div>
-                    <div class="feed-block-leaving-menu-item spotify-logo">
-
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    function drow_feed_new() {
-        block = $('.new_')[0];
-        for (var i = 0; i < 10; i++) {
-            block.innerHTML += `${block_new()}`;
-        }
-    }
-
-    function drow_feed_index() {
-        block = $('.index_')[0];
-        for (var i = 0; i < 10; i++) {
-            block.innerHTML += `${block_index()}`;
-        }
-    }
-
-    drow_feed_new();
-    drow_feed_index();
-</script>
-
-{% endblock js %}

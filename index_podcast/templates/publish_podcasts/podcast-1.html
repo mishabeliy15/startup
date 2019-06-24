@@ -1,5 +1,6 @@
 {% load static %}
 {% get_media_prefix as MEDIA_PREFIX %}
+{% load extra_filters %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -68,7 +69,7 @@
                             </div>
                         </div>
                         <div class="episode_header_time">
-                            {{ episode.duration }}
+                            {{ episode.duration|dur_to_str }}
                         </div>
                     </div>
                     <div class="episode_content">
@@ -96,7 +97,7 @@
 
             <!-- подключаем все скрипты -->
 
-            <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+            <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
             <script type="text/javascript">
                 const USER_ID = {{ object.owner.id }};
                 const PODCAST_ID = {{ object.id }};
@@ -163,7 +164,7 @@
                     });
                 }
 
-                whaitClick();;
+                whaitClick();
             </script>
             <script type="text/javascript" src="{% static 'scripts/publish/podcast.js' %}"></script>
     </body>

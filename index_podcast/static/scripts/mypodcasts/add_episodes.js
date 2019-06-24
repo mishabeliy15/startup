@@ -123,7 +123,6 @@ function drawVideoBlocks(videos) {
 
 
 let innerChooseVideo = [];
-let podcast_selected = null;
 
 function PodcastsToOptionsStr(pd = podcasts) {
     let res = '';
@@ -143,7 +142,7 @@ function clickOnVideo(event, videos) {
                         <div class="header-center">
                             <div class="select">
                                 <select id="select-podcast">
-                                    <option value="" hidden disabled selected>Coose</option>
+                                    <option value="" hidden disabled selected>Choose</option>
                                     ${PodcastsToOptionsStr()}
                                 </select>
                             </div>
@@ -195,6 +194,10 @@ function clickOnVideo(event, videos) {
         `;
     }
     editActive();
+    if (podcast_selected) {
+        $('option')[0].selected = false;
+        $(`option[value="${podcast_selected}"]`)[0].selected = true;
+    }
 }
 
 

@@ -10,6 +10,12 @@ class PodcastListView(LoginRequiredMixin, TemplateView):
 class AddEpisodeView(LoginRequiredMixin, TemplateView):
     template_name = 'mypodcasts/add_episode.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'podcast' in self.request.GET:
+            context['podcast'] = self.request.GET['podcast']
+        return context
+
 
 class EditPodcastView(LoginRequiredMixin, DetailView):
     template_name = 'mypodcasts/edit.html'
