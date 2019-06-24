@@ -69,4 +69,11 @@
         height: 500px;
         width: 500px;
     }
+
+    .edit-podcast-btns div {
+        margin: 2.5px;
+        height: 100px;
+        width: 100px;
+        border-radius: 5px;
+    }
 }

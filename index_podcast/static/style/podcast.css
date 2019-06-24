@@ -85,6 +85,8 @@ body, .blur-blur::before {
 }
 
 .podcast_block_img {
+    display: flex;
+    flex-direction: row;
     background-color: white;
     min-width: 500px;
     max-width: 500px;
@@ -122,7 +124,7 @@ body, .blur-blur::before {
 }
 
 .podcast_block_episods::after {
-    content: 'episods'
+    content: 'Episodes';
 }
 
 .content {
@@ -148,6 +150,7 @@ body, .blur-blur::before {
 }
 
 .episode_header {
+    align-items: center;
     flex-grow: 1;
     font-size: 2rem;
     display: flex;
@@ -157,8 +160,8 @@ body, .blur-blur::before {
 }
 
 .btn-paly {
-    height: 100%;
-    width: 100%;
+    height: 60px;
+    width: 60px;
     cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
@@ -174,11 +177,14 @@ body, .blur-blur::before {
 }
 
 .episode_header_img_and_btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     margin: 5px;
     border-radius: 10px;
-    height: 200px;
-    min-width: 200px;
-    max-width: 200px;
+    height: 120px;
+    min-width: 120px;
+    max-width: 120px;
 }
 
 .episode_header_img {
@@ -223,7 +229,7 @@ body, .blur-blur::before {
 }
 
 .description-max {
-    height: 100%;
+    height: auto;
 }
 
 .episode_content_description_btn {
@@ -274,6 +280,10 @@ body, .blur-blur::before {
 }
 
 .btn-confirm {
+    background-image: url('../image/apply-icon.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 60%;
     background-color: #d2ffcc;
 }
 
@@ -286,6 +296,10 @@ body, .blur-blur::before {
 }
 
 .btn-cancel {
+    background-image: url('../image/go-back-icon.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 60%;
     background-color: #fcffcc;
 }
 
@@ -298,6 +312,10 @@ body, .blur-blur::before {
 }
 
 .btn-delete {
+    background-image: url('../image/trashcan-icon.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 60%;
     background-color: #ffcccc;
 }
 
@@ -578,4 +596,45 @@ body, .blur-blur::before {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+}
+
+.feed-block-leaving {
+    margin-left: 10px;
+    position: relative;
+}
+
+.feed-block-leaving-menu {
+    border-radius: 10px;
+    height: 100%;
+    width: 100px;
+    background-color: gray;
+    opacity: 0.5;
+    -webkit-box-shadow: 10px 10px 10px -5px black;
+    -moz-box-shadow: 10px 10px 10px -5px black;
+    box-shadow: 10px 10px 10px -5px black;
+}
+
+.feed-block-leaving-menu-item-group{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 10px;
+    width: 100px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.feed-block-leaving-menu-item {
+    height: 90px;
+    width: 90px;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

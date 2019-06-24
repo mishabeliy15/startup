@@ -145,14 +145,20 @@ header {
 }
 
 .edit-podcast-btns div {
-    height: 40px;
-    width: 40px;
+    margin: 2.5px;
+    height: 30px;
+    width: 30px;
     border-radius: 5px;
 }
 
 .edit-podcast-btn {}
 
 .view-podcast-btn {
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-image: url('../image/eye-icon.png');
     background-color: #d2ffcc;
 }
 
@@ -165,6 +171,11 @@ header {
 }
 
 .edit-podcast-btn {
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-image: url('../image/pencil-icon.png');
     background-color: #fffccc;
 }
 
@@ -518,9 +529,15 @@ select {
 }
 
 .btn-delete {
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-image: url('../image/trashcan-icon.png');
     cursor: pointer;
     background-color: #ffcccc;
 }
+
 
 .btn-delete:hover {
     background-color: #ffe5e5;
