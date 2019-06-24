@@ -24,7 +24,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 class PodcastViewSet(viewsets.ModelViewSet):
     queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly,)
     pagination_class = StandardResultsSetPagination
     parser_classes = (MultiPartParser, FormParser)
 

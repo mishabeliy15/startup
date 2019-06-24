@@ -117,6 +117,7 @@
             <!-- подключаем все скрипты -->
 
             <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'scripts/main.js' %}"></script>
             <script type="text/javascript">
                 const USER_ID = {{ object.owner.id }};
                 const PODCAST_ID = {{ object.id }};
