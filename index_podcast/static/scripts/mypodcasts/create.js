@@ -35,6 +35,7 @@ function restorePodcastHeader() {
 function get_podcast_url(item) {
     return `/podcasts/user_${item.owner}/${item.id}/`;
 }
+
 function get_podcast_edit_url(item) {
     return `/mypodcasts/${item.id}/`;
 }
@@ -43,8 +44,8 @@ function drawPodcastBlock(item) {
     return `
         <div class="podcast-block">
             <img class="podcast-img" src="/media/${
-                item.image
-            }" alt="podcast-img">
+        item.image
+        }" alt="podcast-img">
             <div class="podcast-content">
                 <div class="podcast-title">
                     ${item.title}
@@ -60,7 +61,7 @@ function drawPodcastBlock(item) {
                 <a href="${get_podcast_edit_url(item)}">
                     <div class="edit-podcast-btn"></div>
                 </a>
-                <div class="btn-delete" onclick="get_btn_dell()"></div>
+                <div class="btn-delete" onclick="get_btn_dell(${item.id})"></div>
             </div>
         </div>
     `;
@@ -76,8 +77,10 @@ function drawAddInputs(item) {
     `;
 }
 
+let podcast_list = null;
+
 function drawPodcasts(items = podcast_list.results) {
-    container = document.getElementById("podcast-list");
+    let container = document.getElementById("podcast-list");
     container.innerHTML = "";
     let find = new RegExp($("#search-request")[0].value, "i");
     for (let i = 0; i < items.length; i++)
@@ -98,7 +101,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         let reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $("#img-preview").attr("src", e.target.result);
             $("#img-preview").show();
         };
@@ -107,9 +110,33 @@ function readURL(input) {
     }
 }
 
+let languages = {
+    "Russian": "ru",
+    "English": "en"
+};
+let genres = {
+    "Arts": "Arts",
+    "Busines": "Busines",
+    "Comedy": "Comedy",
+    "Education": "Education",
+    "Games & Hobbies": "Games &amp; Hobbies",
+    "Government & Organizations": "Government &amp; Organizations",
+    "Organizations": "Organizations",
+    "Health": "Health",
+    "Kids & Family": "Kids &amp; Family",
+    "Music": "Music",
+    "News & Politics": "News &amp; Politics",
+    "Religion & Spirituality": "Religion &amp; Spirituality",
+    "Science & Medicine": "Science &amp; Medicine",
+    "Society & Culture": "Society &amp; Culture",
+    "Sports & Recreation": "Sports &amp; Recreation",
+    "TV & Film": "TV &amp; Film",
+    "Technology": "Technology"
+};
+
 function addPodcast() {
-    input_titles = ["title", "author"];
-    content = $(".content");
+    let input_titles = ["Title", "Author"];
+    let content = $(".content");
     content = document.getElementById("content");
     content.innerHTML = `
                 <form id="create-form" action="javascript:submitForm()">
@@ -154,46 +181,23 @@ function addPodcast() {
         </div>
         <button type=submit class="create-btn">Create</button>
     `;
-    genres = {
-        "Arts": "Arts",
-        "Busines": "Busines",
-        "Comedy": "Comedy",
-        "Education": "Education",
-        "Games & Hobbies": "Games &amp; Hobbies",
-        "Government & Organizations": "Government &amp; Organizations",
-        "Organizations": "Organizations",
-        "Health": "Health",
-        "Kids & Family": "Kids &amp; Family",
-        "Music": "Music",
-        "News & Politics": "News &amp; Politics",
-        "Religion & Spirituality": "Religion &amp; Spirituality",
-        "Science & Medicine": "Science &amp; Medicine",
-        "Society & Culture": "Society &amp; Culture",
-        "Sports & Recreation": "Sports &amp; Recreation",
-        "TV & Film": "TV &amp; Film",
-        "Technology": "Technology"
-    };
-    genere_block = $("#input-Genre")[0];
+    let genere_block = $("#input-Genre")[0];
     for (let i in genres) {
         genere_block.innerHTML += `<option>${i}</option>`;
     }
-    languages = {
-        "Russian": "ru",
-        "English": "en"
-    };
-    language_block = $("#input-Language")[0];
+    let language_block = $("#input-Language")[0];
     for (let i in languages) {
         language_block.innerHTML += `<option>${i}</option>`;
     }
-    $("#input-img").on("change", function() {
+    $("#input-img").on("change", function () {
         readURL(this);
     });
 }
 
 function submitForm() {
-    input_ = ["input-img", "input-title", "input-author", "input-description"];
-    input_v = [];
-    true_v = [];
+    let input_ = ["input-img", "input-Title", "input-Author", "input-description"];
+    let input_v = [];
+    let true_v = [];
     for (let i = 0; i < input_.length; i++) {
         input_v[i] = document.getElementById(input_[i]).value;
         if (input_v[i] != "") {
@@ -206,9 +210,9 @@ function submitForm() {
 
     if (true_v[0] && true_v[1] && true_v[2] && true_v[3]) {
         sendAddPodcast({
-            title: $("#input-title")[0].value,
+            title: $("#input-Title")[0].value,
             image: $("#input-img")[0].files[0],
-            author: $("#input-author")[0].value,
+            author: $("#input-Author")[0].value,
             description: $("#input-description")[0].value,
             language: languages[$("#input-Language")[0].value],
             category: genres[$("#input-Genre")[0].value],
@@ -222,7 +226,7 @@ function submitForm() {
 }
 
 function successfully_created(response) {
-    content = $(".content")[0];
+    let content = $(".content")[0];
     console.log(content);
     content.innerHTML += `
         <div class="window_remove">
@@ -269,6 +273,7 @@ function successfully_created(response) {
 }
 
 let CREATED_PODCAST = null;
+
 function sendAddPodcast(item) {
     let formData = new FormData();
     for (let i in item) formData.append(i, item[i]);
@@ -287,9 +292,9 @@ function sendAddPodcast(item) {
         },
         error: response => {
             console.log(response);
-            for (let i in response.responseJSON){
-                 for (let j = 0;j < response.responseJSON[i].length;j++)
-                      $('.error_' + i)[0].innerHTML += response.responseJSON[i][j];
+            for (let i in response.responseJSON) {
+                for (let j = 0; j < response.responseJSON[i].length; j++)
+                    $('.error_' + i)[0].innerHTML += response.responseJSON[i][j];
             }
         }
     });
@@ -297,46 +302,48 @@ function sendAddPodcast(item) {
 
 function whait_click_window() {
     console.log(1);
-    $('.rss_link').on('click', function(event) {
+    $('.rss_link').on('click', function (event) {
         event.preventDefault();
         let rss_link = $('.rss_link')[0];
         rss_link.select();
         document.execCommand("copy");
     });
-    $('.btn_close').on('click', function(event) {
+    $('.btn_close').on('click', function (event) {
         event.preventDefault();
         getAndDraw();
         console.log(2);
     });
-    $('.btn_add_episods').on('click', function(event) {
+    $('.btn_add_episods').on('click', function (event) {
         event.preventDefault();
         location.href = `/mypodcasts/add-episodes/?podcast=${CREATED_PODCAST.id}`;
     });
 }
 
-function get_btn_dell() {
+let id_del = null;
+
+function get_btn_dell(id) {
     $('.window_remove').toggleClass('display_none');
     $('.window_remove').toggleClass('display_block');
-    id_del = $('.btn-delete').index(this);
+    id_del = id;
     console.log(id_del);
 }
 
 function buttons_dell() {
-    $('.window_remove_button_apply').on('click', function(event) {
+    $('.window_remove_button_apply').on('click', function (event) {
         event.preventDefault();
-        DeleteEpisode(podcast.episodes[id_del].id, () => {
-            block = $('.podcast_episode')[id_del];
-            block.style.display = 'none';
+        DeletePodcast(id_del, () => {
             $('.window_remove').toggleClass('display_none');
             $('.window_remove').toggleClass('display_block');
+            getAndDraw();
         });
     });
 
 
-    $('.window_remove_button_cancel').on('click', function(event) {
+    $('.window_remove_button_cancel').on('click', function (event) {
         event.preventDefault();
         $('.window_remove').toggleClass('display_none');
         $('.window_remove').toggleClass('display_block');
     });
 }
+
 $(getAndDraw);

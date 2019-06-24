@@ -123,7 +123,6 @@ function drawVideoBlocks(videos) {
 
 
 let innerChooseVideo = [];
-let podcast_selected = null;
 
 function PodcastsToOptionsStr(pd = podcasts) {
     let res = '';
@@ -195,6 +194,10 @@ function clickOnVideo(event, videos) {
         `;
     }
     editActive();
+    if (podcast_selected) {
+        $('option')[0].selected = false;
+        $(`option[value="${podcast_selected}"]`)[0].selected = true;
+    }
 }
 
 
