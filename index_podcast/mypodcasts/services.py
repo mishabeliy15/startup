@@ -24,8 +24,11 @@ def iso_duration_to_seconds(s):
     return sum(times)
 
 
+EXTENSION = '.mp3'
+
+
 def download_mp3_from_video(url, name):
-    outtmpl = MEDIA_ROOT + '/' + name + '.%(ext)s'
+    outtmpl = MEDIA_ROOT + '/' + name + EXTENSION
     ydl_opts = {
         'format': 'audio/m4a',
         'outtmpl': outtmpl,
@@ -36,12 +39,12 @@ def download_mp3_from_video(url, name):
 
 def download_with_edit_model(video_id, obj):
     download_mp3_from_video("https://youtu.be/" + video_id, video_id)
-    f = open(MEDIA_ROOT + '/' + video_id + '.m4a', 'rb')
-    obj.audio_file.save(video_id + '.m4a', File(f))
+    f = open(MEDIA_ROOT + '/' + video_id + EXTENSION, 'rb')
+    obj.audio_file.save(video_id + EXTENSION, File(f))
     obj.processed = True
     obj.save()
     f.close()
-    os.remove(MEDIA_ROOT + '/' + video_id + '.m4a')
+    os.remove(MEDIA_ROOT + '/' + video_id + EXTENSION)
 
 
 def download_audio_thread(video_id, obj):
