@@ -52,19 +52,24 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% if user.is_authenticated %}
-                            {% url 'account_logout' %}
-                        {% else %}{% provider_login_url "google" next="/" %}{% endif %}
-                        ">
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
                         <div class="nav-button nav-button-bottm">
                             <div class="nav-button-icon"></div>
-                            <div class="nav-button-text">
-                                {% if user.is_authenticated %}
-                                    Log out{% else %}Login
-                                {% endif %}
-                            </div>
+                            <button type="submit" class="nav-button-text" style="background: none;border: none;color: white">
+                                Log out
+                            </button>
+                        </div>
+                    </form>
+                {% else %}
+                    <a href="{% provider_login_url "google" next="/" %}">
+                        <div class="nav-button nav-button-bottm">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">Login</div>
                         </div>
                     </a>
+                {% endif %}
                 </li>
             </menu>
         </div>
