@@ -569,6 +569,10 @@ body, .blur-blur::before {
     background-image: url('../image/spotify-podcast-logo.jpg');
 }
 
+.youtube-logo {
+    background-image: url('../image/youtube-logo.png');
+}
+
 .rss-btn{
     cursor: pointer;
     display: flex;
@@ -632,7 +636,6 @@ body, .blur-blur::before {
     height: 90px;
     width: 90px;
     cursor: pointer;
-    background-color: black;
     border-radius: 10px;
     background-position: center;
     background-repeat: no-repeat;

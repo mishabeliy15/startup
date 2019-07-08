@@ -9,7 +9,6 @@
 
         <title>{{ object.title }}</title>
         <link type="application/rss+xml" rel="alternate" title="{{ object.title }}" href="https://{{ request.get_host }}{% url 'publish_podcast:podcast-rss' object.owner.id object.id %}" />
-
         <link rel="stylesheet" href="{% static 'style/null.css' %}">
         <link rel="stylesheet" href="{% static 'style/podcast.css' %}">
         <link rel="stylesheet" href="{% static 'style/media-podcast.css' %}">
@@ -24,12 +23,11 @@
                 <div class="podcast_block">
                     <div class="podcast_block_img">
                         <img class="podcast_block_img-img" src="{{ MEDIA_PREFIX }}{{ object.image }}" alt="">
-
                         <div class="feed-block-leaving">
                             <div class="feed-block-leaving-menu">
-
                             </div>
                             <div class="feed-block-leaving-menu-item-group">
+                                <a href="https://www.youtube.com/channel/{{ object.owner.channelid }}" target="_blank" class="feed-block-leaving-menu-item youtube-logo"></a>
                                 {% if object.link_apple %}
                                 <a href="{{ object.link_apple }}" target="_blank" class="feed-block-leaving-menu-item apple-logo">
                                 </a>

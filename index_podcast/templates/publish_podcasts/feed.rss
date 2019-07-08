@@ -13,7 +13,7 @@
         <link>https://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
         <language>{{ object.language }}</language>
         <itunes:category text="{{ object.category }}"/>
-        <itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% for episode in object.episodes.all|dictsort:"created_date" reversed %}
+        <itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% for episode in object.episodes.all|dictsort:"created_date" reversed %}{% if episode.processed %}
         <item>
             <title>{{ episode.title }}</title>
             <description>{{ episode.description }}</description>
@@ -21,9 +21,9 @@
             <itunes:summary>{{ episode.description }}</itunes:summary>
             <pubDate>{{ episode.created_date|date:"D, d M Y H:i:s" }} GMT</pubDate>
             <enclosure url="https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}"
-                       type="audio/mpeg" length="{{ episode.audio_file.size }}"/>
+                       type="audio/x-m4a" length="{{ episode.audio_file.size }}"/>
             <itunes:duration>{{ episode.duration }}</itunes:duration>
             <guid isPermaLink="true">https://{{ request.get_host }}{{ media }}{{ episode.audio_file }}</guid>
-        </item>{% endfor %}
+        </item>{% endif %}{% endfor %}
     </channel>
 </rss>

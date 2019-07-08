@@ -1,7 +1,10 @@
-import youtube_dl, threading
+import youtube_dl
+import threading
 from index_podcast.settings import MEDIA_ROOT
 from django.core.files import File
 import os
+
+EXTENSION = '.m4a'
 
 
 def user_directory_path_audio(instance, filename):
@@ -22,9 +25,6 @@ def iso_duration_to_seconds(s):
             k += 1
     times.pop()
     return sum(times)
-
-
-EXTENSION = '.mp3'
 
 
 def download_mp3_from_video(url, name):
