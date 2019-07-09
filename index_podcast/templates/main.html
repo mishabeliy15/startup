@@ -4,6 +4,18 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143546509-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-143546509-1');
+    </script>
     <title>{% block title %}Video2Cast{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'style/null.css' %}">
     <link rel="stylesheet" href="{% static 'style/main.css' %}">
@@ -52,24 +64,25 @@
                     </a>
                 </li>
                 <li>
-                {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                        <div class="nav-button nav-button-bottm">
-                            <div class="nav-button-icon"></div>
-                            <button type="submit" class="nav-button-text" style="background: none;border: none;color: white">
-                                Log out
-                            </button>
-                        </div>
-                    </form>
-                {% else %}
-                    <a href="{% provider_login_url "google" next="/" %}">
-                        <div class="nav-button nav-button-bottm">
-                            <div class="nav-button-icon"></div>
-                            <div class="nav-button-text">Login</div>
-                        </div>
-                    </a>
-                {% endif %}
+                    {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            <div class="nav-button nav-button-bottm">
+                                <div class="nav-button-icon"></div>
+                                <button type="submit" class="nav-button-text"
+                                        style="background: none;border: none;color: white">
+                                    Log out
+                                </button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <a href="{% provider_login_url "google" next="/" %}">
+                            <div class="nav-button nav-button-bottm">
+                                <div class="nav-button-icon"></div>
+                                <div class="nav-button-text">Login</div>
+                            </div>
+                        </a>
+                    {% endif %}
                 </li>
             </menu>
         </div>
@@ -86,7 +99,7 @@
 
     <div class="content box-shadow" id="content">
         {% block content %}
-            
+
         {% endblock content %}
     </div>
 
