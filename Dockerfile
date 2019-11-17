@@ -9,6 +9,7 @@ COPY requirements.txt /opt/services/djangoapp/src/
 WORKDIR /opt/services/djangoapp/src
 # install our two dependencies
 RUN pip install -r requirements.txt
+RUN pip install --upgrade youtube-dl
 # copy our project code
 COPY . /opt/services/djangoapp/src
 

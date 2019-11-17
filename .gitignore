@@ -11,3 +11,4 @@ media/
 index_podcast/index_podcast/local_settings.py
 media_volume/
 static_volume
+.env

@@ -1,6 +1,7 @@
 import requests
+import os
 
-API_KEY = 'AIzaSyAu4Hl8gxM7-qVxt25tsj6rHkrj5K1rR_4'
+API_KEY = os.getenv('GOOGLE_API_KEY')
 
 
 def get_all_video_of_channel(channelid, maxres=50):
