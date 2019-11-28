@@ -1,0 +1,11 @@
+{% extends 'category/base.html' %}
+{% block inner_content %}
+    <h1>Update category</h1>
+    <form method="post" style="font-size: 18px">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Update">
+    </form>
+    <form method="post" action="{% url 'category:delete-category' object.pk %}">{% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    </form>
+{% endblock inner_content %}

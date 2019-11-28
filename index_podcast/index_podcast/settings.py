@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'rest_framework',
+    'django_filters',
+    'category',
 ]
 
 SITE_ID = 1

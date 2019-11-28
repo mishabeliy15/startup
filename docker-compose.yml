@@ -32,6 +32,8 @@ services:
 
   database1:  # <-- IMPORTANT: same name as in DATABASES setting, otherwise Django won't find the database!
     image: postgres
+    ports:
+      - 5432:5432
     networks:  # <-- connect to the bridge
       - database1_network
 

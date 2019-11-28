@@ -7,3 +7,4 @@ djangorestframework
 Pillow
 youtube_dl
 sentry-sdk>=0.13.2
+django-filter

@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}"/>
+{% endblock %}
+{% block content %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'category:list-category' %}">Categories<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'category:add-category' %}">Add category</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'category:add-subcategory' %}">Add subcategory</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block inner_content %}
+    {% endblock inner_content %}
+{% endblock content %}

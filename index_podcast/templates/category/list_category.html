@@ -1,0 +1,29 @@
+{% extends 'category/base.html' %}
+{% block inner_content %}
+    <h1>Categories</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Category</th>
+            <th scope="col">Subcategory</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in object_list %}
+            <tr>
+                <td scope="row">{{ category.pk }}</td>
+                <td><a href="{% url 'category:update-category' category.pk %}">{{ category.display }}</a></td>
+                <td>
+                    {% for subcategory in category.subcategories.all %}
+                        <a href="{% url 'category:update-subcategory' subcategory.pk %}">{{ subcategory.display }}</a>
+                        {% if not forloop.last %}<hr/>{% endif %}
+                    {% empty %}
+                        Not one exists
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock inner_content %}

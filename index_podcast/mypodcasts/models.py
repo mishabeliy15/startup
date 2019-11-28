@@ -1,5 +1,6 @@
 from django.db import models
 from .services import download_audio_thread, user_directory_path_audio
+from category.models import SubCategory
 
 
 def user_directory_path(instance, filename):
@@ -20,6 +21,7 @@ class Podcast(models.Model):
     link_spotify = models.URLField(blank=True)
     link_google = models.URLField(blank=True)
     link_apple = models.URLField(blank=True)
+    categories = models.ManyToManyField(SubCategory, blank=True)
 
     def __str__(self):
         return self.title
