@@ -163,12 +163,12 @@ function addPodcast() {
     content.innerHTML += `
         <div class="input-block">
             <div class="input-title">Genre :</div>
-            <select id="input-Genre">
+            <select id="input-Genre" multiple size="7" style="height:100px">
             </select>
         </div>
         <div class="input-block">
             <div class="input-title">Language:</div>
-            <select id="input-Language">
+            <select id="input-Language" required>
             </select>
         </div>
         <div class="input-title">Description :</div>
@@ -182,8 +182,12 @@ function addPodcast() {
         <button type=submit class="create-btn">Create</button>
     `;
     let genere_block = $("#input-Genre")[0];
-    for (let i in genres) {
-        genere_block.innerHTML += `<option>${i}</option>`;
+    for (let category of genres) {
+        let options = `<optgroup label="${category.display}">`;
+        for (let subcategory of category['subcategories'])
+            options += `<option value="${subcategory['id']}">${subcategory['name']}</option>`;
+        options += `</optgroup>`;
+        genere_block.innerHTML += options;
     }
     let language_block = $("#input-Language")[0];
     for (let i in languages) {
@@ -207,7 +211,11 @@ function submitForm() {
         }
     }
     console.log(true_v);
-
+    let categories = [];
+    for (let option of $('#input-Genre')[0])
+        if (option.selected)
+            categories.push(+option.value);
+    console.log(categories);
     if (true_v[0] && true_v[1] && true_v[2] && true_v[3]) {
         sendAddPodcast({
             title: $("#input-Title")[0].value,
@@ -215,7 +223,7 @@ function submitForm() {
             author: $("#input-Author")[0].value,
             description: $("#input-description")[0].value,
             language: languages[$("#input-Language")[0].value],
-            category: genres[$("#input-Genre")[0].value],
+            categories: categories,
             explicit: $("#explicit")[0].checked
         });
     } else {
@@ -347,3 +355,6 @@ function buttons_dell() {
 }
 
 $(getAndDraw);
+$(GetCategories((data) => {
+    genres = data;
+}));

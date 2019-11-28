@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from rest_framework.pagination import PageNumberPagination
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, status
+from rest_framework.response import Response
+
 from .google_api import get_all_info_videos_of_channel
 from .models import Podcast, Episode
 from .serializers import PodcastSerializer, EpisodeSerializer
@@ -38,6 +40,16 @@ class PodcastViewSet(viewsets.ModelViewSet):
             return Podcast.objects.all().order_by("-created_date")
         else:
             return Podcast.objects.filter(owner=self.request.user).order_by("-created_date")
+
+    def create(self, request, *args, **kwargs):
+        data = request.data.dict()
+        if isinstance(data['categories'], str):
+            data['categories'] = list(map(int, data['categories'].split(',')))
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class EpisodeViewSet(viewsets.ModelViewSet):

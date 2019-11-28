@@ -98,3 +98,14 @@ function DeletePodcast(id, success, error) {
         }
     });
 }
+
+function GetCategories(success) {
+    $.getJSON(`/settings/api/category/`, data => {
+        console.log(data);
+        if(success)
+            success(data);
+    }).fail(resp =>{
+        if(error)
+            error(resp);
+    });
+}
