@@ -8,3 +8,5 @@ Pillow
 youtube_dl
 sentry-sdk>=0.13.2
 django-filter
+django-easy-pdf>=0.2.0.dev1
+WeasyPrint>=0.34

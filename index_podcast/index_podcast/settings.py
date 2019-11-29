@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'languages',
     'stats',
     'reports',
+    'easy_pdf',
 ]
 
 SITE_ID = 1
