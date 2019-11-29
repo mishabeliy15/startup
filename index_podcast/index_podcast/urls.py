@@ -13,4 +13,5 @@ urlpatterns = [
     path('settings/', include('category.urls')),
     path('settings/', include('languages.urls')),
     path('settings/', SettingsView.as_view(), name='settings'),
+    path('stats/', include('stats.urls')),
 ]
