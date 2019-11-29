@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_filters',
     'category',
     'languages',
+    'stats',
 ]
 
 SITE_ID = 1

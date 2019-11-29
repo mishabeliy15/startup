@@ -13,7 +13,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser, File
 
 @login_required
 def api_view_my_videos(request):
-    maxres = request.GET['maxRes'] if 'maxRes' in request.GET else 10
+    maxres = request.GET['maxResults'] if 'maxResults' in request.GET else 10
     videos = get_all_info_videos_of_channel(request.user.channelid, maxres)
     return JsonResponse(videos)
 

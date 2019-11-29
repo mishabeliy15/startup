@@ -3,6 +3,11 @@ function restorePodcastHeader() {
         <div class="header-center">
             <input id="search-request" class="input-name" type="text" name="search podcasts" value="" maxlength="25" placeholder="Search">
             <input class="input-name-btn" type="button" name="button search" value="">
+            <label for="min_count_episodes">Min count of episodes</label>
+            <input type="number" min="0" value=0 id="min_count_episodes">
+            <select id="search-lang" multiple style="height: 50px">
+            <option disabled value="null">Language</option>
+            </select>
         </div>
         <div class="header-right">
             <input class="add-podcast-btn" type="button" name="button search" value="Сreate a new podcast">
@@ -27,9 +32,15 @@ function restorePodcastHeader() {
         </div>
     </div>
     `;
+    let language_block = $("#search-lang")[0];
+    for (let language of languages) {
+        language_block.innerHTML += `<option value="${language['id']}">${language['display']}</option>`;
+    }
     buttons_dell();
     $(".add-podcast-btn").on("click", addPodcast);
     $("#search-request").bind("input", () => drawPodcasts());
+    $("#min_count_episodes").bind("input", () => drawPodcasts());
+    $("#search-lang").bind("input", () => drawPodcasts());
 }
 
 function get_podcast_url(item) {
@@ -45,7 +56,7 @@ function drawPodcastBlock(item) {
         <div class="podcast-block">
             <img class="podcast-img" src="/media/${
         item.image
-        }" alt="podcast-img">
+    }" alt="podcast-img">
             <div class="podcast-content">
                 <div class="podcast-title">
                     ${item.title}
@@ -83,8 +94,18 @@ function drawPodcasts(items = podcast_list.results) {
     let container = document.getElementById("podcast-list");
     container.innerHTML = "";
     let find = new RegExp($("#search-request")[0].value, "i");
+    let min_count = $("#min_count_episodes")[0].value;
+    let lang = [];
+    for (let l of $("#search-lang")[0])
+        if (l.selected) lang.push(+l.value);
+    /*console.log(find);
+    console.log(min_count);
+    console.log(lang);*/
     for (let i = 0; i < items.length; i++)
-        if (find.test(items[i].title))
+        if (find.test(items[i].title) &&
+            items[i]['episodes'].length >= min_count &&
+            (lang.includes(items[i]['language']) || lang.length === 0)
+        )
             container.innerHTML += drawPodcastBlock(items[i]);
 }
 
@@ -217,7 +238,7 @@ function submitForm() {
             categories.push(+option.value);
     console.log(categories);
     let language = null;
-    for(let leng of $("#input-Language")[0]) {
+    for (let leng of $("#input-Language")[0]) {
         if (leng.selected) {
             language = +leng.value;
             break;
@@ -362,7 +383,6 @@ function buttons_dell() {
     });
 }
 
-$(getAndDraw);
 $(GetCategories((data) => {
     genres = data;
 }));
@@ -370,3 +390,4 @@ $(GetLanguages(data => {
     languages = data;
     console.log(languages);
 }));
+$(getAndDraw);
