@@ -27,3 +27,7 @@ class PoliticsView(TemplateView):
 
 class IntroPage(TemplateView):
     template_name = 'landings/intro_landing.html'
+
+
+class SettingsView(TemplateView):
+    template_name = 'category/base.html'

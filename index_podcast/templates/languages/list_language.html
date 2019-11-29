@@ -1,0 +1,22 @@
+{% extends 'category/base.html' %}
+{% block inner_content %}
+    <h1>languages</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Language</th>
+            <th scope="col">Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for language in object_list %}
+            <tr>
+                <td scope="row">{{ language.pk }}</td>
+                <td><a href="{% url 'languages:update' language.pk %}">{{ language.display }}</a></td>
+                <td>{{ language.code }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock inner_content %}

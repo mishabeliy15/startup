@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'category',
+    'languages',
 ]
 
 SITE_ID = 1

@@ -17,7 +17,6 @@ class Podcast(models.Model):
     author = models.CharField(max_length=128, blank=True)
     explicit = models.BooleanField(default=False)
     language = models.CharField(max_length=6, default="en")
-    category = models.CharField(max_length=128, blank=True)
     link_spotify = models.URLField(blank=True)
     link_google = models.URLField(blank=True)
     link_apple = models.URLField(blank=True)
