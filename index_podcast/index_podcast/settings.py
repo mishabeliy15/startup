@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'category',
     'languages',
     'stats',
+    'reports',
 ]
 
 SITE_ID = 1

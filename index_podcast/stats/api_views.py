@@ -1,7 +1,8 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .models import ViewsPodcast, ViewsEpisode
-from .serializators import ViewsPodcastSerializer, ViewsEpisodeSerializer
+from .serializators import ViewsPodcastSerializer, ViewsEpisodeSerializer, StatPodcastSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from mypodcasts.models import Podcast
 
 
 class ViewsPodcastViewSet(ModelViewSet):
@@ -12,7 +13,12 @@ class ViewsPodcastViewSet(ModelViewSet):
 
 
 class ViewsEpisodeViewSet(ModelViewSet):
-    model = ViewsEpisode.objects.all().order_by('-datetime')
+    queryset = ViewsEpisode.objects.all().order_by('-datetime')
     serializer_class = ViewsEpisodeSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('episode', 'datetime', 'duration',)
+
+
+class StatsPodcastViewSet(ReadOnlyModelViewSet):
+    queryset = Podcast.objects.all()
+    serializer_class = StatPodcastSerializer

@@ -3,6 +3,12 @@ let audio = new Audio();
 let episodes = null;
 
 
+function postEpisode(params) {
+    $.post('/stats/api/episode/', params);
+    console.log(89);
+}
+
+
 function loadPodcast() {
     $.getJSON(`/mypodcasts/api/podcasts/${PODCAST_ID}`, {
         'user_id': USER_ID
@@ -26,6 +32,8 @@ $('.btn-paly').on('click', function (event) {
         play_index = +this.id;
         audio.src = '/media/' + episodes[play_index].audio_file;
         audio.play();
+        console.log(episodes[play_index].id);
+        postEpisode({'episode':episodes[play_index].id});
     } else if (audio.paused) {
         console.log(`play: ${play_index}`);
         audio.play();

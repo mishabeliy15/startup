@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <script>
+        const CRSF_TOKEN = "{{ csrf_token }}";
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="{% static 'scripts/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+    </script>
+    <style>
+        .pie{
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastPage"></div>
+        </div>
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastEpisodes" ></div>
+        </div>
+        <div class="col-sm">
+            <select id="choosePodcast">
+            </select>
+            <div class="pie" id="piechartEpisodesInPodcast"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastLanguage"></div>
+        </div>
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastEpisodesLanguage" ></div>
+        </div>
+        <div class="col-sm">
+            <select id="choosePodcastLang">
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+    let data = null, languages = null;
+
+    function drawPie(dataset, options, div_id) {
+        let data = google.visualization.arrayToDataTable(dataset);
+        let chart = new google.visualization.PieChart(document.getElementById(div_id));
+        chart.draw(data, options);
+    }
+
+    function drawPodcastsPie() {
+        let dataset = [['Podcast', 'Podcast page visitors']];
+        for (let podcast of data) {
+            let value = [podcast.title, podcast.stats.length];
+            dataset.push(value);
+        }
+        console.log(dataset);
+        drawPie(dataset, {
+            title: 'How many podcasts visitors',
+            is3D: true,
+        }, 'piechartPodcastPage');
+    }
+
+    function drawPodcastsPieByEpisodes() {
+        let dataset = [['Podcast', 'Podcast episodes visitors']];
+        for (let podcast of data) {
+            let value = [podcast.title, 0];
+            for (let episode of podcast.episodes)
+                value[1] += episode.stats.length;
+            dataset.push(value);
+        }
+        console.log(dataset);
+        drawPie(dataset, {
+            title: 'How many podcast listen includes episodes',
+            is3D: true,
+        }, 'piechartPodcastEpisodes');
+    }
+
+
+    function drawEpisodesInPodcasts(podcast) {
+        let dataset = [['Episode', 'Number of plays']];
+        for (let episode of podcast.episodes) dataset.push([episode.title, episode.stats.length]);
+        console.log(dataset);
+        drawPie(dataset, {
+            title: `Distribution episodes in the podcast ${podcast.title}`,
+            is3D: true,
+        }, 'piechartEpisodesInPodcast')
+    }
+
+    function drawPodcastByLanguage() {
+        let dataset = [['Language', 'Podcast page visitors']];
+        let lengs = {};
+        for (let podcast of data) {
+            if (podcast.language in lengs)
+                ++lengs[podcast.language];
+            else
+                lengs[podcast.language] = 1;
+        }
+        for (let language in lengs) {
+            for (let i of languages) {
+                if (i.id == language) {
+                    dataset.push([i.display, lengs[language]]);
+                    break;
+                }
+            }
+        }
+        console.log(dataset);
+        drawPie(dataset, {
+            title: 'Languages',
+            is3D: true,
+        }, 'piechartPodcastLanguage');
+    }
+
+    function fillSelection() {
+        let selection = $("#choosePodcast")[0];
+        for (let podcast of data)
+            selection.innerHTML += `<option value="${podcast.id}">${podcast.title}</option>`;
+        drawEpisodesInPodcasts(data[0]);
+        $("#choosePodcast").on('change', function (event) {
+            let id = +event.target.value;
+            for (let podcast of data)
+                if (podcast.id === id) {
+                    drawEpisodesInPodcasts(podcast);
+                    return;
+                }
+        });
+    }
+
+    $.getJSON('/settings/api/languages/', (resp) => {
+        languages = resp;
+        console.log(languages);
+    });
+
+    $.getJSON('/stats/api/statistics/', (resp) => {
+        data = resp;
+        console.log(data);
+        drawPodcastsPie();
+        drawPodcastsPieByEpisodes();
+        fillSelection();
+        drawPodcastByLanguage();
+    });
+</script>
+</body>
+</html>
