@@ -1,6 +1,7 @@
 from django.db import models
 from .services import download_audio_thread, user_directory_path_audio
 from category.models import SubCategory
+from languages.models import Language
 
 
 def user_directory_path(instance, filename):
@@ -16,7 +17,7 @@ class Podcast(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=128, blank=True)
     explicit = models.BooleanField(default=False)
-    language = models.CharField(max_length=6, default="en")
+    language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True, blank=True)
     link_spotify = models.URLField(blank=True)
     link_google = models.URLField(blank=True)
     link_apple = models.URLField(blank=True)

@@ -190,8 +190,8 @@ function addPodcast() {
         genere_block.innerHTML += options;
     }
     let language_block = $("#input-Language")[0];
-    for (let i in languages) {
-        language_block.innerHTML += `<option>${i}</option>`;
+    for (let language of languages) {
+        language_block.innerHTML += `<option value="${language['id']}">${language['display']}</option>`;
     }
     $("#input-img").on("change", function () {
         readURL(this);
@@ -216,13 +216,21 @@ function submitForm() {
         if (option.selected)
             categories.push(+option.value);
     console.log(categories);
+    let language = null;
+    for(let leng of $("#input-Language")[0]) {
+        if (leng.selected) {
+            language = +leng.value;
+            break;
+        }
+    }
+    console.log(language);
     if (true_v[0] && true_v[1] && true_v[2] && true_v[3]) {
         sendAddPodcast({
             title: $("#input-Title")[0].value,
             image: $("#input-img")[0].files[0],
             author: $("#input-Author")[0].value,
             description: $("#input-description")[0].value,
-            language: languages[$("#input-Language")[0].value],
+            language: language,
             categories: categories,
             explicit: $("#explicit")[0].checked
         });
@@ -357,4 +365,8 @@ function buttons_dell() {
 $(getAndDraw);
 $(GetCategories((data) => {
     genres = data;
+}));
+$(GetLanguages(data => {
+    languages = data;
+    console.log(languages);
 }));

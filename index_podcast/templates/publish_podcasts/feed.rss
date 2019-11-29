@@ -11,7 +11,10 @@
         <googleplay:image href="https://{{ request.get_host }}{{ media }}{{ object.image }}"/>
         <itunes:image href="https://{{ request.get_host }}{{ media }}{{ object.image }}"/>
         <link>https://{{ request.get_host }}{% url 'publish_podcast:podcast-detail' object.owner.id object.id %}</link>
-        <language>{{ object.language }}</language>
+        <language>{{ object.language.code }}</language>{% for subcategory in object.categories.all %}
+        <itunes:category text="{{ subcategory.category.name }}">
+            <itunes:category text="{{ subcategory.name }}" />
+        </itunes:category>{% endfor %}
         <itunes:category text="{{ object.category }}"/>
         <itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% for episode in object.episodes.all|dictsort:"created_date" reversed %}{% if episode.processed %}
         <item>

@@ -109,3 +109,14 @@ function GetCategories(success) {
             error(resp);
     });
 }
+
+function GetLanguages(success) {
+    $.getJSON(`/settings/api/languages/`, data => {
+        console.log(data);
+        if(success)
+            success(data);
+    }).fail(resp =>{
+        if(error)
+            error(resp);
+    });
+}
