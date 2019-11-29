@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class ViewsPodcast(models.Model):
+    podcast = models.ForeignKey('mypodcasts.Podcast', on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"[{self.datetime}] {self.podcast.title}"
+
