@@ -1,5 +1,5 @@
 requests
-Django>=2.2
+Django==2.2
 django-allauth>=0.39.1
 psycopg2-binary
 gunicorn

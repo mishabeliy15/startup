@@ -13,11 +13,9 @@ class EpisodesView(ListView):
     template_name = 'reports/episodes.html'
 
 
-class PodcastsPdf(PDFTemplateResponseMixin, ListView):
-    model = Podcast
-    template_name = 'reports/podcasts.html'
+class PodcastsPdf(PDFTemplateResponseMixin, PodcastHTMLView):
+    pass
 
 
-class EpisodesPDF(PDFTemplateResponseMixin, ListView):
-    model = Podcast
-    template_name = 'reports/episodes.html'
+class EpisodesPDF(PDFTemplateResponseMixin, EpisodesView):
+    pass
