@@ -13,44 +13,7 @@
     <script src="{% static 'scripts/main.js' %}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart']});
-    </script>
-    <style>
-        .pie{
-            height: 500px;
-        }
-    </style>
-</head>
-<body>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm">
-            <div class="pie" id="piechartPodcastPage"></div>
-        </div>
-        <div class="col-sm">
-            <div class="pie" id="piechartPodcastEpisodes" ></div>
-        </div>
-        <div class="col-sm">
-            <select id="choosePodcast">
-            </select>
-            <div class="pie" id="piechartEpisodesInPodcast"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <div class="pie" id="piechartPodcastLanguage"></div>
-        </div>
-        <div class="col-sm">
-            <div class="pie" id="piechartPodcastEpisodesLanguage" ></div>
-        </div>
-        <div class="col-sm">
-            <select id="choosePodcastLang">
-            </select>
-        </div>
-    </div>
-</div>
-<script>
-    let data = null, languages = null;
+           let data = null, languages = null;
 
     function drawPie(dataset, options, div_id) {
         let data = google.visualization.arrayToDataTable(dataset);
@@ -140,15 +103,55 @@
         languages = resp;
         console.log(languages);
     });
+    function start() {
+        $.getJSON('/stats/api/statistics/', (resp) => {
+            data = resp;
+            console.log(data);
+            drawPodcastsPie();
+            drawPodcastsPieByEpisodes();
+            fillSelection();
+            drawPodcastByLanguage();
+        });
+    }
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(start);
+    </script>
+    <style>
+        .pie{
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastPage"></div>
+        </div>
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastEpisodes" ></div>
+        </div>
+        <div class="col-sm">
+            <select id="choosePodcast">
+            </select>
+            <div class="pie" id="piechartEpisodesInPodcast"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastLanguage"></div>
+        </div>
+        <div class="col-sm">
+            <div class="pie" id="piechartPodcastEpisodesLanguage" ></div>
+        </div>
+        <div class="col-sm">
+            <select id="choosePodcastLang">
+            </select>
+        </div>
+    </div>
+</div>
+<script>
 
-    $.getJSON('/stats/api/statistics/', (resp) => {
-        data = resp;
-        console.log(data);
-        drawPodcastsPie();
-        drawPodcastsPieByEpisodes();
-        fillSelection();
-        drawPodcastByLanguage();
-    });
 </script>
 </body>
 </html>
