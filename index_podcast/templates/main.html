@@ -62,6 +62,38 @@
                             </div>
                         </div>
                     </a>
+                    <a href="{% url 'settings' %}">
+                        <div class="nav-button">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">
+                                Settings
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'stats:stats' %}">
+                        <div class="nav-button">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">
+                                Statistics
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reports:podcasts-pdf' %}">
+                        <div class="nav-button">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">
+                                Report of podcasts
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reports:episodes-pdf' %}">
+                        <div class="nav-button">
+                            <div class="nav-button-icon"></div>
+                            <div class="nav-button-text">
+                                Report of podcasts
+                            </div>
+                        </div>
+                    </a>
                 </li>
                 <li>
                     {% if user.is_authenticated %}

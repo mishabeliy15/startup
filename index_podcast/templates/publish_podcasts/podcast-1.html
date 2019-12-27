@@ -28,6 +28,16 @@
     <link rel="stylesheet" href="{% static 'style/media-podcast.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
           rel="stylesheet">
+    <style>
+        .filter-label {
+            font-size: 20px;
+            color: #2aabd2;
+        }
+
+        .filter-input {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 <div class="blur-block-header">
@@ -80,6 +90,15 @@
     <div class="blur-blur blur-blur-content"></div>
     <div class="blur-transparency black"></div>
     <div class="blur-conteiner content" id="content">
+        <div>
+            <label class="filter-label" for="search-input">Search</label>
+            <input class="filter-input" id="search-input" type="text" placeholder="Search request">
+        </div>
+        <div>
+            <label class="filter-label" for="filter-duration">Duration greater than(minutes)</label>
+            <input min="0" step="1" placeholder="Min duration" class="filter-input" id="filter-duration" type="number">
+        </div>
+        <div id="episode-list">
         {% for episode in object.episodes.all|dictsort:"created_date" reversed %}
             <div class="podcast_episode">
                 <div class="episode_header">
@@ -106,6 +125,7 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
     </div>
     <div class="window_remove display_none">
         <div class="window_remove_hidden"></div>
@@ -203,6 +223,66 @@
         whaitClick();
     </script>
     <script type="text/javascript" src="{% static 'scripts/publish/podcast.js' %}"></script>
-</body>
+    <script>
+        function durationToStr(value) {
+            let res = '';
+            let minutes = Math.round(value / 60);
+            if (minutes >= 60) {
+                res += Math.round(minutes / 60) + " h ";
+                minutes %= 60;
+            }
+            res += minutes + ' min';
+            return res
+        }
 
+        function episodeComponent(episode, index) {
+            return `<div class="podcast_episode">
+                <div class="episode_header">
+                    <div class="episode_header_date">
+                        ${(new Date(episode.created_date)).toLocaleString()}
+                    </div>
+                    <div class="episode_header_img_and_btn">
+                        <div class="btn-paly icon-play" id="${index}">
+                        </div>
+                    </div>
+                    <div class="episode_header_time">
+                        ${durationToStr(episode.duration)}
+                    </div>
+                </div>
+                <div class="episode_content">
+                    <div class="episode_content_title">
+                        ${episode.title}
+                        <div class="episode_content_liner"></div>
+                    </div>
+                    <pre class="episode_content_description description-min">
+                        ${episode.description}
+                        </pre>
+                    <input class="episode_content_description_btn" type="button" name="" value="...more">
+                </div>
+            </div>`;
+        }
+        
+        function searchFilter(text) {
+            let request = $("#search-input")[0].value.toLowerCase();
+            return text.toLowerCase().includes(request);
+        }
+
+        function filterDuration(duration) {
+            let request = +$("#filter-duration")[0].value;
+            return duration / 60 >= request;
+        }
+
+        function reDrawEpisodes() {
+            let html = "";
+            for (let i = 0; i < episodes.length; ++i){
+                if (searchFilter(episodes[i].title) && filterDuration(episodes[i].duration))
+                    html += episodeComponent(episodes[i], i);
+            }
+            $("#episode-list")[0].innerHTML = html;
+        }
+
+        $("#search-input").on("input", () => reDrawEpisodes());
+        $("#filter-duration").on("input", () => reDrawEpisodes());
+    </script>
+</body>
 </html>

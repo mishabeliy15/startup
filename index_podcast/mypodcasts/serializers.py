@@ -15,8 +15,11 @@ class EpisodeSerializer(serializers.ModelSerializer):
 class PodcastSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=False, required=False)
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
-    episodes = EpisodeSerializer(many=True, read_only=True)
+    episodes = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Podcast
         fields = '__all__'
+
+    def get_episodes(self, instance):
+        return EpisodeSerializer(instance.episodes.all().order_by('-created_date'), many=True).data
